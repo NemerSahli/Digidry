@@ -1,0 +1,7 @@
+installation in Terminal:-
+
+1- ~/Farmania/$: npm init -y
+2- ~/Farmania/$: npm install 
+3- ~/Farmania/$: npm install express
+4- ~/Farmania/$: npm install file-system
+5- ~/Farmania/$: npm install randomstring
