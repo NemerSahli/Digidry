@@ -3,7 +3,6 @@ $(document).ready(function(){
     console.log('document is ready...');
     hideForms();
     $('#login-form-id').show();
-    getLiveData();
 });
 
 $('#login-btn-id').click( ()=>{
@@ -30,9 +29,12 @@ $('#login-btn-id').click( ()=>{
              
                 if(res.error == 0){
                     hideForms();
+                    getLiveData();
                     $('#chartContainer').show();
+                    $('#logout-id').show();
                     $('#input-user-id').val('');
                     $('#input-password-id').val('');
+
                 }else if(res.error == 2){
                     alert(res.result);                        
                 }else{
@@ -48,14 +50,12 @@ $('#login-btn-id').click( ()=>{
     }
 });
 
-
-
 $("#forgetPassword-id").click( ()=>{
     console.log('forget password clicked...');
     $('#login-form-id').hide();
     $('#forgetPassword-form-id').show();
-
 });
+
 $('#register-form-login-btn-id').click(()=>{
     $('#login-form-id').show();
     $('#register-form-id').hide();
@@ -72,13 +72,35 @@ $('#login-form-register-btn-id').click(()=>{
     $('#register-btn-id').show();
 });
 
+$('#logout-btn-id').click(()=>{
+    console.log('Logout btn clicked...');
+
+    $.ajax({
+        url:"/logout",
+        type: 'GET',
+        dataType: 'json',
+        success:function(response){
+            console.log('response',response);
+            hideForms();
+            $('#login-form-id').show();
+        },
+        error: function(xhr,status,error){
+            console.log(`
+            error:${error},
+            status:${status},
+            xhr:${JSON.stringify(xhr)}
+            `);
+        }
+    });
+});
+
 function hideForms(){
     $('#login-form-id').hide();
     $('#register-form-id').hide();
     $('#forgetPassword-form-id').hide();
     $('#confirm-reset-pass-btn-id').hide();
-    // $('#chartContainer').hide();
-    
+    $('#chartContainer').hide();
+    $('#logout-id').hide();
 }
 
 
@@ -125,6 +147,7 @@ var options = {
 };
 
 function getLiveData(){
+
     console.log('whatever');
     $.ajax({
         
@@ -145,8 +168,24 @@ function getLiveData(){
             }
             
             console.log('options:',options);
-            $("#chartContainer").CanvasJSChart(options);
-            
+            var chart = new CanvasJS.Chart("chartContainer", options);
+            chart.render();
+            // $("#chartContainer").CanvasJSChart(options);
+            setInterval(function(){
+                // let x = Math.round(Math.random()*2);
+                // let y = Math.round(Math.random()*3);
+                // options.data[0].dataPoints.push({ 
+                //         x:options.data[0].dataPoints[options.data[0].dataPoints.length-1].x +x ,
+                //         y:options.data[0].dataPoints[options.data[0].dataPoints.length-1].y +x+1});
+                // options.data[1].dataPoints.push({
+                //         x:options.data[1].dataPoints[options.data[1].dataPoints.length-1].x +x ,
+                //         y:options.data[1].dataPoints[options.data[1].dataPoints.length-1].y +y+1 });
+                //         // $("#chartContainer").CanvasJSChart(options);
+                //         options.data[0].dataPoints.shift();
+                //         options.data[1].dataPoints.shift();
+                        chart.render();
+
+            },1500);
         },
         error: function(xhr,status,error){
             console.log(`

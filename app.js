@@ -41,10 +41,13 @@ app.post('/login',(req,res)=>{
         (err,data)=>{
             if(err) return res.send({err:err})
             let users = JSON.parse(data);
-            console.log("users",users);
+            // console.log("users",users);
             for (let i = 0; i < users.length; i++) {
                 if(users[i].username == username && users[i].password ==password){
-                    
+                    mainUser = username;
+                    req.session.user = mainUser;
+                    req.session.admin= true;
+                    console.log(JSON.stringify(req.session));
                     return res.send({error:0,result:users[i]});
 
                 }                
@@ -179,7 +182,7 @@ app.get('/activate',(req,res)=>{
     }
 });
 
-app.get('/getData',(req,res)=>{
+app.get('/getData',auth,(req,res)=>{
     // fs.readFile(__dirname + '/esp32.json', 'utf-8',
     //     (err,data)=>{
     //         if(err) return res.send({err:err})
@@ -188,22 +191,6 @@ app.get('/getData',(req,res)=>{
     axios.get("http://nodeapps.vulkanclub.tech/getdata").then(response=>{
         // console.log("data",response.data);
         res.json(response.data);
-    });
-});
-
-app.post('/laty',auth,(req,res)=>{
-    let newLaty= new Laty(req.body);
-    newLaty.save(function(err,dbres){
-        if(err) return res.send(err);
-        return res.send(dbres);
-    });
-});
-
-// DELETE request to remove product
-app.delete('/laty/:id',auth,(req,res)=>{
-    Laty.deleteOne( {_id:req.params.id}, function (err,docs) {
-        if(err) return res.send({error:err});
-        res.send({data:'Record has been removed'});
     });
 });
 
