@@ -2,9 +2,53 @@
 $(document).ready(function(){
     console.log('document is ready...');
     hideForms();
-    // $('#login-form-id').show();
-getLiveData();
+    $('#login-form-id').show();
+    getLiveData();
 });
+
+$('#login-btn-id').click( ()=>{
+    let userName = $('#input-user-id').val();
+    let password = $('#input-password-id').val();
+
+    if(userName == '' || password == '' ){
+        alert('user and password required!');
+    }else{
+        let user={
+            username: $('#input-user-id').val(),
+            password: $('#input-password-id').val()
+        }
+        console.log(user);
+        $.ajax({
+            url:"login",
+             type: 'POST',
+            data:  JSON.stringify(user),
+            dataType: 'json',
+            contentType:'application/json',
+            
+            success:function(res){
+                console.log('response',res);
+             
+                if(res.error == 0){
+                    hideForms();
+                    $('#chartContainer').show();
+                    $('#input-user-id').val('');
+                    $('#input-password-id').val('');
+                }else if(res.error == 2){
+                    alert(res.result);                        
+                }else{
+                    alert('Invalid User or wrong password', res.result);
+                }
+            },
+            error: function(xhr,status,error){
+                console.log(`error:${error},
+                            status:${status},
+                            xhr:${JSON.stringify(xhr)}`);
+            }
+        }); 
+    }
+});
+
+
 
 $("#forgetPassword-id").click( ()=>{
     console.log('forget password clicked...');
@@ -27,13 +71,18 @@ $('#login-form-register-btn-id').click(()=>{
     $('#register-form-id').show();
     $('#register-btn-id').show();
 });
+
 function hideForms(){
     $('#login-form-id').hide();
     $('#register-form-id').hide();
     $('#forgetPassword-form-id').hide();
     $('#confirm-reset-pass-btn-id').hide();
+    // $('#chartContainer').hide();
     
 }
+
+
+
 var options = {
     animationEnabled: true,
     theme: "dark1",
@@ -58,18 +107,7 @@ var options = {
             name: "Humidity %",
             yValueFormatString: "##",
             dataPoints: [
-     
                 // { x: 1, y: 35 },
-                // { x: 2, y: 40 },
-                // { x: 3, y: 42 },
-                // { x: 4, y: 46 },
-                // { x: 5, y: 56 },
-                // { x: 6, y: 66 },
-                // { x: 7, y: 70 },
-                // { x: 8, y: 200 },
-                // { x: 9, y: 65 },
-                // { x: 10, y: 70 },
-                // { x: 11, y: 75 },
             ]
          },
         {
@@ -79,19 +117,7 @@ var options = {
             yValueFormatString: "##.##",
             xValueFormatString: "MMM YYYY",
             dataPoints: [
-
                 // { x: 1, y: 40 },
-                // { x: 2, y: 17.89 },
-                // { x: 3, y: 20.60 },
-                // { x: 4, y: 22.22 },
-                // { x: 5, y: 26.78 },
-                // { x: 6, y: 24.56 },
-                // { x: 7, y: 20.99 },
-                // { x: 8, y: 24.67 },
-                // { x: 9, y: 26.45 },
-                // { x: 10, y: 27.84 },
-                // { x:11, y: 30.53 },
-
             ]
          }
 
@@ -99,20 +125,25 @@ var options = {
 };
 
 function getLiveData(){
+    console.log('whatever');
     $.ajax({
+        
         // url:'http://nodeapps.vulkanclub.tech/getdata',
-        url:'getData',
+        // url:'http://35.156.88.18:3050/users',
+        url:'/getData',
         type: 'GET',
+        // contentType: 'json/application',
         dataType: 'json',
-        crossDomain:true,
-        async:false,
+        async:true,
         success:function(response){
-            console.log("success response ",response);
+       
+            let entries = JSON.parse(response);
+            for (let index = entries.length-10; index < entries.length; index++) {
+                console.log(entries[index])
+                options.data[0].dataPoints.push({ x:index,  y:parseInt(entries[index].hum)});
+                options.data[1].dataPoints.push({ x:index,  y:parseInt(entries[index].temp)});
+            }
             
-            response.forEach( (entry ,index) => {
-                options.data[0].dataPoints.push({ x:index,  y:parseInt(entry.hum)});
-                options.data[1].dataPoints.push({ x:index,  y:parseInt(entry.temp)});
-            });
             console.log('options:',options);
             $("#chartContainer").CanvasJSChart(options);
             
@@ -124,12 +155,7 @@ function getLiveData(){
             xhr:${JSON.stringify(xhr)}
             `);   
         }
+
     });
+    console.log('afer shwioasdhfj');
 }
-
-// window.onload = function () {
-
-
-
-    
-// }

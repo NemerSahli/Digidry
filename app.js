@@ -3,6 +3,9 @@ const randomstring = require('randomstring');
 const session = require('express-session'); 
 const cookieParser = require('cookie-parser');
 const fs = require('fs');
+const axios= require('axios');
+
+
 // const mongoose=require('mongoose');
 // const Laty= require('./latymodel.js');
 // const User= require('./usermodel.js');
@@ -33,43 +36,24 @@ app.post('/login',(req,res)=>{
     let username = req.body.username;
     let password = req.body.password;
     console.log(username, password);
-    let userMatched = false;
 
-    User.findOne({username:username},function(err,dbres){
-        if(err) return res.send({error:err});
-        
-        if(dbres){
-            console.log('before compare...');
-            bcrypt.compare(password, dbres.password, function(err, result){
-                
-                if(username == dbres.username && result){
-                    console.log(dbres);
-                    mainUser = username;
-                    req.session.user = mainUser;
-                    req.session.admin= true;
-                    console.log('logedin');
-                    console.log(JSON.stringify(req.session));
-                    User.findById(dbres._id, function (err, doc) {
-                        if (err) return res.send({error:err});
-                        console.log('activate',doc.acitivate);
-                        if(!doc.acitivate) return res.send({ error:2, result: 'Email not activated'});
-                        doc.save(function(err,savedData){
-                            if(err) res.send({error:err});
-                            res.send({error: 0, result:savedData});
-                        });
-                        
-                    });
-                }else{
-                    return res.send( { error:10, result: 'wrong password'});
-                }
-            });
-            userMatched = true;
-        }else{
-            return res.send( { error:1, result: 'invalid email or email not activated'});
-        }
-        // if(!userMatched) return res.send( { error:1, result: 'invalid email or email not activated'});
-    });
+    fs.readFile(__dirname + '/users.json', 'utf-8',
+        (err,data)=>{
+            if(err) return res.send({err:err})
+            let users = JSON.parse(data);
+            console.log("users",users);
+            for (let i = 0; i < users.length; i++) {
+                if(users[i].username == username && users[i].password ==password){
+                    
+                    return res.send({error:0,result:users[i]});
+
+                }                
+            }
+            return res.send({error:2,result:"user not found"});
+        });
 });
+
+
 
 app.post('/reset-pass',(req,res)=>{
     console.log('reset password...');
@@ -196,15 +180,15 @@ app.get('/activate',(req,res)=>{
 });
 
 app.get('/getData',(req,res)=>{
-    // Laty.find( {}, function (err, docs) {
-    //     if(err) res.send({error:err});
-    //     res.send(docs);
-    // });
-    fs.readFile(__dirname + '/'+ 'esp32.json', 'utf-8',
-        (err,data)=>{
-            if(err) return res.send({err:err})
-            return res.send(JSON.parse(data));
-        });
+    // fs.readFile(__dirname + '/esp32.json', 'utf-8',
+    //     (err,data)=>{
+    //         if(err) return res.send({err:err})
+    //         return res.send(JSON.parse(data));
+    //     });
+    axios.get("http://nodeapps.vulkanclub.tech/getdata").then(response=>{
+        // console.log("data",response.data);
+        res.json(response.data);
+    });
 });
 
 app.post('/laty',auth,(req,res)=>{
@@ -239,4 +223,4 @@ function auth(req,res,next){
  
 
 app.listen(8080);
-console.log('app running at port 3000');
+console.log('app running at port 8080');
