@@ -2,6 +2,7 @@ const express = require('express');
 const randomstring = require('randomstring');
 const session = require('express-session'); 
 const cookieParser = require('cookie-parser');
+const fs = require('fs');
 // const mongoose=require('mongoose');
 // const Laty= require('./latymodel.js');
 // const User= require('./usermodel.js');
@@ -13,7 +14,7 @@ var nodemailer = require('nodemailer');
 var mailSender = require('./mailSender.js')
 
 const app = express();
-app.use('/login',express.static(__dirname+'/public'));
+app.use('/',express.static(__dirname+'/public'));
 var mainUser = "";
 
 app.use(express.json());
@@ -194,11 +195,16 @@ app.get('/activate',(req,res)=>{
     }
 });
 
-app.get('/laties',auth,(req,res)=>{
-    Laty.find( {}, function (err, docs) {
-        if(err) res.send({error:err});
-        res.send(docs);
-    });
+app.get('/getData',(req,res)=>{
+    // Laty.find( {}, function (err, docs) {
+    //     if(err) res.send({error:err});
+    //     res.send(docs);
+    // });
+    fs.readFile(__dirname + '/'+ 'esp32.json', 'utf-8',
+        (err,data)=>{
+            if(err) return res.send({err:err})
+            return res.send(JSON.parse(data));
+        });
 });
 
 app.post('/laty',auth,(req,res)=>{
@@ -232,5 +238,5 @@ function auth(req,res,next){
 }
  
 
-app.listen(3000);
+app.listen(8080);
 console.log('app running at port 3000');

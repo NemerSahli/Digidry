@@ -7,3 +7,4 @@ installation in Terminal:-
 5- ~/Farmania/$: npm install randomstring
 6- ~/Farmania/$: npm install cookie-parser
 7- ~/Farmania/$: npm install cookie-parser
+8- ~/Farmania/$: npm install nodemailer
