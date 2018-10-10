@@ -5,16 +5,65 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Fruits Dryer</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
         <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     </head>
 <body>
 
-
+        <!-- ************************************ -->
+    <!-- Login Form -->
+        <div class="row justify-content-center" id="login-form-id">
+            <div class="col-4 form-group login-form" >
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="input-user-id" aria-describedby="emailHelp" placeholder="Enter your Email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="input-password-id" placeholder="Password">
+                </div>
+                <a href="#" id="login-form-register-btn-id" class="mr-2">Sign up</a>
+                <a href="#" id="forgetPassword-id">forget Password</a>          
+                <button type="button" class="float-right btn btn-primary" id="login-btn-id">Login</button>
+            </div>
+        </div>
+    <!-- ********************************************************* -->
+        <!-- signup Form -->
+        <div class="row justify-content-center" id="register-form-id">
+            <div class="col-4 form-group register-form" >
+                <div class="form-group">
+                    <label >Email</label>
+                    <input type="email" class="form-control" id="input-register-user-id" aria-describedby="emailHelp" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label >Password</label>
+                    <input type="password" class="form-control" id="input-register-password-id" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label >Confirm password</label>
+                    <input type="password" class="form-control" id="input-register-confirm-password-id" placeholder="Confirm Password">
+                </div>
+                <a href="#" id="register-form-login-btn-id">Login</a>
+                <button type="button" class="float-right btn btn-primary" id="register-btn-id">register</button>
+                <button type="button" class="float-right btn btn-primary" id="confirm-reset-pass-btn-id">confirm</button>
+            </div>
+        </div>
+    
+        <!-- Reset Password Form -->
+        <div class="row justify-content-center" id="forgetPassword-form-id">
+            <div class="col-4 form-group login-form" >
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="forget-password-form-input-email-id" aria-describedby="emailHelp" placeholder="Enter your Email">
+                </div>
+                <a href="#" id="forget-password-form-login-id" class="mr-2">login</a>       
+                <button type="button" class="float-right btn btn-primary" id="forget-password-form-send-btn-id">Send</button>
+            </div>
+        </div>
+    <!-- *********************************************************** -->
     <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 
-    <!-- <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script> -->
     
     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -22,6 +71,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- <script src="jquery.js"></script> -->
     <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+    <!-- <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script> -->
     <script src="main.js"></script>
 </body>
 </html>
