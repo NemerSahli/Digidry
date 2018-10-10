@@ -5,3 +5,6 @@ installation in Terminal:-
 3- ~/Farmania/$: npm install express
 4- ~/Farmania/$: npm install file-system
 5- ~/Farmania/$: npm install randomstring
+6- ~/Farmania/$: npm install cookie-parser
+7- ~/Farmania/$: npm install cookie-parser
+8- ~/Farmania/$: npm install nodemailer
