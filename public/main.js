@@ -2,7 +2,7 @@
 $(document).ready(function(){
     console.log('document is ready...');
     hideForms();
-    $('#login-form-id').show();
+    // $('#login-form-id').show();
 
 });
 
@@ -123,5 +123,42 @@ window.onload = function () {
     
             ]
     };
+
+
+
     $("#chartContainer").CanvasJSChart(options);
+}
+
+getLiveData();
+function getLiveData(){
+    $.ajax({
+        // url:'http://nodeapps.vulkanclub.tech/getdata',
+        url:"http://35.156.88.18:3050/users",
+        type: 'GET',
+        dataType: 'json',
+      
+        async:false,
+        success:function(response){
+            console.log("success response ",response);
+            
+            response.forEach(newRecord => {
+                let newData =    `<div style="background: white">
+                                    <h5>Tem:</h5>
+                                    <h5>Hum:</h5>
+                                    <h5>Duty:</h5>
+                                    <h5>Date:</h5>
+                                </div>`
+
+                $('body').append(newData);
+            });
+            
+        },
+        error: function(xhr,status,error){
+            console.log(`
+            error:${error},
+            status:${status},
+            xhr:${JSON.stringify(xhr)}
+            `);   
+        }
+    });
 }
