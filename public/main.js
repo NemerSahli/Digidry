@@ -161,7 +161,7 @@ function getLiveData(){
         success:function(response){
        
             let entries = JSON.parse(response);
-            for (let index = entries.length-10; index < entries.length; index++) {
+            for (let index = entries.length-100; index < entries.length; index++) {
                 console.log(entries[index])
                 options.data[0].dataPoints.push({ x:index,  y:parseInt(entries[index].hum)});
                 options.data[1].dataPoints.push({ x:index,  y:parseInt(entries[index].temp)});
