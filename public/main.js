@@ -206,7 +206,7 @@ function getLiveData(){
         async:true,
         success:function(response){
        
-            let entries = JSON.parse(response);
+            let entries = response;
             for (let index = entries.length-100; index < entries.length; index++) {
                 console.log(entries[index])
                 options.data[0].dataPoints.push({ x:index,  y:parseInt(entries[index].hum)});
@@ -218,18 +218,18 @@ function getLiveData(){
             chart.render();
             // $("#chartContainer").CanvasJSChart(options);
             setInterval(function(){
-                let x = Math.round(Math.random()*2);
-                let y = Math.round(Math.random()*3);
-                options.data[0].dataPoints.push({ 
-                        x:options.data[0].dataPoints[options.data[0].dataPoints.length-1].x +x ,
-                        y:options.data[0].dataPoints[options.data[0].dataPoints.length-1].y +x+1});
-                options.data[1].dataPoints.push({
-                        x:options.data[1].dataPoints[options.data[1].dataPoints.length-1].x +x ,
-                        y:options.data[1].dataPoints[options.data[1].dataPoints.length-1].y +y+1 });
-                        // $("#chartContainer").CanvasJSChart(options);
-                        options.data[0].dataPoints.shift();
-                        options.data[1].dataPoints.shift();
-                        chart.render();
+                // let x = Math.round(Math.random()*2);
+                // let y = Math.round(Math.random()*3);
+                // options.data[0].dataPoints.push({ 
+                //         x:options.data[0].dataPoints[options.data[0].dataPoints.length-1].x +x ,
+                //         y:options.data[0].dataPoints[options.data[0].dataPoints.length-1].y +x+1});
+                // options.data[1].dataPoints.push({
+                //         x:options.data[1].dataPoints[options.data[1].dataPoints.length-1].x +x ,
+                //         y:options.data[1].dataPoints[options.data[1].dataPoints.length-1].y +y+1 });
+                //         // $("#chartContainer").CanvasJSChart(options);
+                //         options.data[0].dataPoints.shift();
+                //         options.data[1].dataPoints.shift();
+                //         chart.render();
 
             },1500);
         },
