@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
     console.log('document is ready...');
     hideForms();
@@ -47,6 +46,53 @@ $('#login-btn-id').click( ()=>{
                             xhr:${JSON.stringify(xhr)}`);
             }
         }); 
+    }
+});
+
+$('#register-btn-id').click( ()=>{
+    let userName = $('#input-register-user-id').val();
+    let password = $('#input-register-password-id').val();
+    let confirmPassword = $('#input-register-confirm-password-id').val();
+
+
+    if(userName == '' || password == '' || confirmPassword == '' ){
+        alert('user and password required!');
+    }else if(password == confirmPassword){
+
+        let newUser={
+            username: userName,
+            password: password
+        }
+
+        $.ajax({
+            url:"register",
+             type: 'POST',
+            data:  JSON.stringify(newUser),
+            dataType: 'json',
+            contentType:'application/json',
+            
+            success:function(res){
+                console.log('response',res);
+                if (res.error == 101){
+                    alert("This email exist, please signup with other one");
+                } else if(res.error == 0){
+                    hideForms();
+                    $('#login-form-id').show();
+
+                    alert('Thank You for registration!');
+                    // $('#inputTime').val();
+                }else{
+                    alert('Invalid User or wrong password', res.result);
+                }
+            },
+            error: function(xhr,status,error){
+                console.log(`
+                error:${error},
+                status:${status},
+                xhr:${JSON.stringify(xhr)}
+                `);
+            }
+        });
     }
 });
 

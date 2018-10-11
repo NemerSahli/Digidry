@@ -93,39 +93,42 @@ app.post('/register',(req,res)=>{
     if(!req.body.username || !req.body.password){
         return   res.send('username and password required');
     }
-    User.findOne({username:req.body.username},function(err,dbres){
-        if(err) return res.send({err:err});
-        if(dbres) return res.send({error:101,data:'this user exist'}); 
+
+      
 
         let activeKey = randomstring.generate(20);
  
-        bcrypt.hash(req.body.password, 10, function(err, hashedPassResult){
+   
+        let newUser ={
+            username: req.body.username,
+            password: req.body.password ,
+            previousVisit:new Date(),
+            acitivateKey: activeKey,
+            acitivate: false,
+            resetPassword:false
+        }
+         
+        fs.readFile(__dirname + '/users.json', 'utf-8',
+        (err,data)=>{
             if(err) return res.send({err:err});
-            console.log('password hashed');
-        
-            let query ={
-                username: req.body.username,
-                password: hashedPassResult ,
-                previousVisit:new Date(),
-                acitivateKey: activeKey,
-                acitivate: false,
-                resetPassword:false
+            let users = JSON.parse(data);
+            // console.log("users",users);
+            for (let i = 0; i < users.length; i++) {
+                if(users[i].username == newUser.username){
+                    return res.send({error:101,data:'this user exist'}); 
+                }                
             }
-            
-            let newUser= new User(query);
-            newUser.save(function(err){
-                if(err) return res.send(err);
-                // return res.send({error:0, data:"Registered completed"});
-                let mailBody = `<h3>Thanks for registration</h3>
-                <p>Please confirm your registration by click on the link below:</p>
-                <a href="http://localhost:3000/activate/?activateLink=${activeKey}">http://localhost:3000/activate/?activateLink=${activeKey}</a>
-                <p>yours sincerely</p>
-                <p>DCI Fbw8 Team</p>`
-                mailSender.sendMail(req.body.username, "Confirm Acitivation",mailBody);
-                res.send({error:0,data:"email has been sent"});
-            });
-        });    
-    });    
+            users.push(newUser);
+            fs.writeFile(__dirname + '/users.json',JSON.stringify(users),'utf-8',(err,data)=>{
+                if(err) return res.send({err:err});
+                return res.send({error:0,data:"new user has been sent"});
+            })
+        });
+        
+        
+          
+          
+       
 });
 
 app.post('/reset',(req,res)=>{
