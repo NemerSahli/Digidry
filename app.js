@@ -5,8 +5,8 @@ const cookieParser = require('cookie-parser');
 const fs = require('fs');
 const axios= require('axios');
 
-const fileESPtempHum = __dirname + '/esp32data.json';
-const fileESPduty = __dirname + '/esp32duty.json';
+const fileESPtempHum = __dirname + '/esp32.json';
+// const fileESPduty = __dirname + '/esp32duty.json';
 
 const port = process.env.port || 8080;
 
@@ -184,8 +184,8 @@ app.get('/activate',(req,res)=>{
     }
 });
 
-app.get('/getData',(req,res)=>{
-    fs.readFile(__dirname + '/esp32.json', 'utf-8',
+app.get('/getdata', (req,res)=>{
+    fs.readFile(fileESPtempHum, 'utf-8',
         (err,data)=>{
             if(err) return res.send({err:err})
             return res.send(JSON.parse(data));
