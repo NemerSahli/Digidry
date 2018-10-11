@@ -5,12 +5,8 @@ const cookieParser = require('cookie-parser');
 const fs = require('fs');
 const axios= require('axios');
 
+const port = process.env.port || 8080;
 
-// const mongoose=require('mongoose');
-// const Laty= require('./latymodel.js');
-// const User= require('./usermodel.js');
-
-// mongoose.connect('mongodb://localhost:27017/too_late_comer');
 // const bcrypt = require('bcrypt');
 
 var nodemailer = require('nodemailer');
@@ -211,57 +207,43 @@ function auth(req,res,next){
      }
 }
 //  NIKo CODE:-
+
 //
-// const randomstring = require('randomstring');
-// const express = require('express');
-// const fs = require('fs');
-//
-// const app = express();
-// app.use(express.json());
-// const port = process.env.port || 8080;
 // app.set('view engine', 'ejs');
-//
-// const fileESPtempHum = __dirname + '/esp32data.json';
-// const fileESPduty = __dirname + '/esp32duty.json';
-//
+
+const fileESPtempHum = __dirname + '/esp32data.json';
+const fileESPduty = __dirname + '/esp32duty.json';
+
 // app.get('/',(req, res) => {
 //   res.render('index');
 // });
 //
-// app.get('/test/:temp/:hum/:duty', (req, res) => {
-//   var getEspData =
-//     {
-//       "temp": req.params.temp,
-//       "hum": req.params.hum,
-//       "duty": req.params.duty,
-//       "lastEntry": new Date(),
-//       "hash": randomstring.generate(10)
-//     }
-//     fs.readFile(fileESPtempHum, (err, data)=>{
-//        if(err) return res.send({error:err});
-//
-//        let entries = JSON.parse(data);
-//
-//        entries.push(getEspData);
-//
-//        fs.writeFile(fileESPtempHum,
-//                    JSON.stringify(entries),
-//                    'utf-8',
-//                    (err)=>{
-//                        if (err) return res.send({error:err})
-//                        return res.send({message:'entry has been saved'});
-//                    });
-//                  });
-// });
-//
-// app.get('/getdata', (req, res) => {
-//   fs.readFile(fileESPtempHum, "utf-8", (err, data) => {
-//     if(err)
-//       res.send([{error: err}]);
-//     res.json(data);
-//   });
-// });
-//
+app.get('/test/:temp/:hum/:duty', (req, res) => {
+  var getEspData =
+    {
+      "temp": req.params.temp,
+      "hum": req.params.hum,
+      "duty": req.params.duty,
+      "lastEntry": new Date(),
+      "hash": randomstring.generate(10)
+    }
+    fs.readFile(fileESPtempHum, (err, data)=>{
+       if(err) return res.send({error:err});
+
+       let entries = JSON.parse(data);
+
+       entries.push(getEspData);
+
+       fs.writeFile(fileESPtempHum,
+                   JSON.stringify(entries),
+                   'utf-8',
+                   (err)=>{
+                       if (err) return res.send({error:err})
+                       return res.send({message:'entry has been saved'});
+                   });
+                 });
+});
+
 // app.post('/newDuty/:newDuty', (req, res) => {
 //   var getNewDuty =
 //     {
@@ -284,10 +266,9 @@ function auth(req,res,next){
 //   });
 // });
 //
-// app.listen(port);
+app.listen(port);
 
 
 
 
-app.listen(8080);
 console.log('app running at port 8080');
