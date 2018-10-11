@@ -1,20 +1,107 @@
-
 $(document).ready(function(){
     console.log('document is ready...');
     hideForms();
     $('#login-form-id').show();
-
 });
 
+$('#login-btn-id').click( ()=>{
+    let userName = $('#input-user-id').val();
+    let password = $('#input-password-id').val();
+
+    if(userName == '' || password == '' ){
+        alert('user and password required!');
+    }else{
+        let user={
+            username: $('#input-user-id').val(),
+            password: $('#input-password-id').val()
+        }
+        console.log(user);
+        $.ajax({
+            url:"login",
+             type: 'POST',
+            data:  JSON.stringify(user),
+            dataType: 'json',
+            contentType:'application/json',
+            
+            success:function(res){
+                console.log('response',res);
+             
+                if(res.error == 0){
+                    hideForms();
+                    getLiveData();
+                    $('#chartContainer').show();
+                    $('#logout-id').show();
+                    $('#input-user-id').val('');
+                    $('#input-password-id').val('');
+
+                }else if(res.error == 2){
+                    alert(res.result);                        
+                }else{
+                    alert('Invalid User or wrong password', res.result);
+                }
+            },
+            error: function(xhr,status,error){
+                console.log(`error:${error},
+                            status:${status},
+                            xhr:${JSON.stringify(xhr)}`);
+            }
+        }); 
+    }
+});
+
+$('#register-btn-id').click( ()=>{
+    let userName = $('#input-register-user-id').val();
+    let password = $('#input-register-password-id').val();
+    let confirmPassword = $('#input-register-confirm-password-id').val();
 
 
+    if(userName == '' || password == '' || confirmPassword == '' ){
+        alert('user and password required!');
+    }else if(password == confirmPassword){
+
+        let newUser={
+            username: userName,
+            password: password
+        }
+
+        $.ajax({
+            url:"register",
+             type: 'POST',
+            data:  JSON.stringify(newUser),
+            dataType: 'json',
+            contentType:'application/json',
+            
+            success:function(res){
+                console.log('response',res);
+                if (res.error == 101){
+                    alert("This email exist, please signup with other one");
+                } else if(res.error == 0){
+                    hideForms();
+                    $('#login-form-id').show();
+
+                    alert('Thank You for registration!');
+                    // $('#inputTime').val();
+                }else{
+                    alert('Invalid User or wrong password', res.result);
+                }
+            },
+            error: function(xhr,status,error){
+                console.log(`
+                error:${error},
+                status:${status},
+                xhr:${JSON.stringify(xhr)}
+                `);
+            }
+        });
+    }
+});
 
 $("#forgetPassword-id").click( ()=>{
     console.log('forget password clicked...');
     $('#login-form-id').hide();
     $('#forgetPassword-form-id').show();
-
 });
+
 $('#register-form-login-btn-id').click(()=>{
     $('#login-form-id').show();
     $('#register-form-id').hide();
@@ -30,98 +117,130 @@ $('#login-form-register-btn-id').click(()=>{
     $('#register-form-id').show();
     $('#register-btn-id').show();
 });
+
+$('#logout-btn-id').click(()=>{
+    console.log('Logout btn clicked...');
+
+    $.ajax({
+        url:"/logout",
+        type: 'GET',
+        dataType: 'json',
+        success:function(response){
+            console.log('response',response);
+            hideForms();
+            $('#login-form-id').show();
+        },
+        error: function(xhr,status,error){
+            console.log(`
+            error:${error},
+            status:${status},
+            xhr:${JSON.stringify(xhr)}
+            `);
+        }
+    });
+});
+
 function hideForms(){
     $('#login-form-id').hide();
     $('#register-form-id').hide();
     $('#forgetPassword-form-id').hide();
     $('#confirm-reset-pass-btn-id').hide();
-    
+    $('#chartContainer').hide();
+    $('#logout-id').hide();
 }
 
-window.onload = function () {
 
-    var options = {
-        animationEnabled: true,
-        theme: "dark1",
-        title:{
-            text: "Fruits Dryer"
-        },
-        axisY :{
-            includeZero: false,
-            prefix: "C° - % ",
-            lineThickness: 0
-        },
-        toolTip: {
-            shared: true
-        },
-        legend: {
-            fontSize: 15
-        },
-        data: [
-        {
-                type: "splineArea", 
-                showInLegend: true,
-                name: "Humidity %",
-                yValueFormatString: "##",
-                dataPoints: [
-                    // { x: new Date(2018, 0), y: 0 },
-                    // { x: new Date(2018, 1), y: 40 },
-                    // { x: new Date(2018, 2), y: 42 },
-                    // { x: new Date(2018, 3), y: 46 },
-                    // { x: new Date(2018, 4), y: 56 },
-                    // { x: new Date(2018, 5), y: 66 },
-                    // { x: new Date(2018, 6), y: 70 },
-                    // { x: new Date(2018, 7), y: 80 },
-                    // { x: new Date(2018, 8), y: 65 },
-                    // { x: new Date(2018, 9), y: 70 },
-                    // { x: new Date(),        y: 75 },
-                    { x: 1, y: 0 },
-                    { x: 2, y: 40 },
-                    { x: 3, y: 42 },
-                    { x: 4, y: 46 },
-                    { x: 5, y: 56 },
-                    { x: 6, y: 66 },
-                    { x: 7, y: 70 },
-                    { x: 8, y: 200 },
-                    { x: 9, y: 65 },
-                    { x: 10, y: 70 },
-                    { x: 11,        y: 75 },
-                ]
-             },
-            {
-                type: "splineArea",
-                showInLegend: true,
-                name: "Temprature C°",
-                yValueFormatString: "##.##",
-                xValueFormatString: "MMM YYYY",
-                dataPoints: [
-                    // { x: new Date(2018, 0), y: 0 },
-                    // { x: new Date(2018, 1), y: 17.89 },
-                    // { x: new Date(2018, 2), y: 20.60 },
-                    // { x: new Date(2018, 3), y: 22.22 },
-                    // { x: new Date(2018, 4), y: 26.78 },
-                    // { x: new Date(2018, 5), y: 24.56 },
-                    // { x: new Date(2018, 6), y: 20.99 },
-                    // { x: new Date(2018, 7), y: 24.67 },
-                    // { x: new Date(2018, 8), y: 26.45 },
-                    // { x: new Date(2018, 9), y: 27.84 },
-                    // { x: new Date(),        y: 30.53 },
-                    { x: 1, y: 0 },
-                    { x: 2, y: 17.89 },
-                    { x: 3, y: 20.60 },
-                    { x: 4, y: 22.22 },
-                    { x: 5, y: 26.78 },
-                    { x: 6, y: 24.56 },
-                    { x: 7, y: 20.99 },
-                    { x: 8, y: 24.67 },
-                    { x: 9, y: 26.45 },
-                    { x: 10, y: 27.84 },
-                    { x:11,        y: 30.53 },
 
-                ]
-             }
-    
+var options = {
+    animationEnabled: true,
+    theme: "dark1",
+    title:{
+        text: "Fruits Dryer"
+    },
+    axisY :{
+        includeZero: false,
+        prefix: "C° - % ",
+        lineThickness: 0
+    },
+    toolTip: {
+        shared: true
+    },
+    legend: {
+        fontSize: 15
+    },
+    data: [
+    {
+            type: "splineArea", 
+            showInLegend: true,
+            name: "Humidity %",
+            yValueFormatString: "##",
+            dataPoints: [
+                // { x: 1, y: 35 },
             ]
-    };
-    $("#chartContainer").CanvasJSChart(options);
+         },
+        {
+            type: "splineArea",
+            showInLegend: true,
+            name: "Temprature C°",
+            yValueFormatString: "##.##",
+            xValueFormatString: "MMM YYYY",
+            dataPoints: [
+                // { x: 1, y: 40 },
+            ]
+         }
+
+        ]
+};
+
+function getLiveData(){
+
+    console.log('whatever');
+    $.ajax({
+        
+        // url:'http://nodeapps.vulkanclub.tech/getdata',
+        // url:'http://35.156.88.18:3050/users',
+        url:'/getData',
+        type: 'GET',
+        // contentType: 'json/application',
+        dataType: 'json',
+        async:true,
+        success:function(response){
+       
+            let entries = JSON.parse(response);
+            for (let index = entries.length-100; index < entries.length; index++) {
+                console.log(entries[index])
+                options.data[0].dataPoints.push({ x:index,  y:parseInt(entries[index].hum)});
+                options.data[1].dataPoints.push({ x:index,  y:parseInt(entries[index].temp)});
+            }
+            
+            console.log('options:',options);
+            var chart = new CanvasJS.Chart("chartContainer", options);
+            chart.render();
+            // $("#chartContainer").CanvasJSChart(options);
+            setInterval(function(){
+                let x = Math.round(Math.random()*2);
+                let y = Math.round(Math.random()*3);
+                options.data[0].dataPoints.push({ 
+                        x:options.data[0].dataPoints[options.data[0].dataPoints.length-1].x +x ,
+                        y:options.data[0].dataPoints[options.data[0].dataPoints.length-1].y +x+1});
+                options.data[1].dataPoints.push({
+                        x:options.data[1].dataPoints[options.data[1].dataPoints.length-1].x +x ,
+                        y:options.data[1].dataPoints[options.data[1].dataPoints.length-1].y +y+1 });
+                        // $("#chartContainer").CanvasJSChart(options);
+                        options.data[0].dataPoints.shift();
+                        options.data[1].dataPoints.shift();
+                        chart.render();
+
+            },1500);
+        },
+        error: function(xhr,status,error){
+            console.log(`
+            error:${error},
+            status:${status},
+            xhr:${JSON.stringify(xhr)}
+            `);   
+        }
+
+    });
+    console.log('afer shwioasdhfj');
 }
