@@ -33,6 +33,7 @@ $('#login-btn-id').click( ()=>{
                 if(res.error == 0){
                     hideForms();
                     getLiveData();
+                    updateData();
                     
                     $('#liveData-form-id').show();
                     $('#chartContainer').show();
@@ -196,10 +197,12 @@ var options = {
                 // { x: 1, y: 40 },
             ]
          }
-
+         
         ]
-};
-
+    };
+    
+var  chart = new CanvasJS.Chart("chartContainer", options);
+    
 function getLiveData(){
 
     console.log('whatever');
@@ -215,35 +218,28 @@ function getLiveData(){
         success:function(response){
        
             let entries = response;
-            for (let index = entries.length-100; index < entries.length; index++) {
-                console.log(entries[index])
+            let startIndex = 0;
+            if(entries.length > 100){
+                startIndex = entries.length -100;
+            }
+            console.log(entries.length + ' ' + startIndex );
+            options.data[0].dataPoints = [];
+            options.data[1].dataPoints = [];
+
+            for (let index = startIndex; index < entries.length; index++) {
                 options.data[0].dataPoints.push({ x:index,  y:parseInt(entries[index].hum)});
                 options.data[1].dataPoints.push({ x:index,  y:parseInt(entries[index].temp)});
             }
 
             console.log('options:',options);
-            var chart = new CanvasJS.Chart("chartContainer", options);
+
             chart.render();
 
             $('#temprature-id').html(entries[entries.length-1].temp + " C°");
             $('#humidity-id').html(entries[entries.length-1].hum  + " %");
             $('#speed-id').html(entries[entries.length-1].duty + " rpm");
             // $("#chartContainer").CanvasJSChart(options);
-            // setInterval(function(){
-                // let x = Math.round(Math.random()*2);
-                // let y = Math.round(Math.random()*3);
-                // options.data[0].dataPoints.push({ 
-                //         x:options.data[0].dataPoints[options.data[0].dataPoints.length-1].x +x ,
-                //         y:options.data[0].dataPoints[options.data[0].dataPoints.length-1].y +x+1});
-                // options.data[1].dataPoints.push({
-                //         x:options.data[1].dataPoints[options.data[1].dataPoints.length-1].x +x ,
-                //         y:options.data[1].dataPoints[options.data[1].dataPoints.length-1].y +y+1 });
-                //         // $("#chartContainer").CanvasJSChart(options);
-                //         options.data[0].dataPoints.shift();
-                //         options.data[1].dataPoints.shift();
-                //         chart.render();
-
-            // },1500);
+         
         },
         error: function(xhr,status,error){
             console.log(`
@@ -254,5 +250,11 @@ function getLiveData(){
         }
 
     });
-    console.log('afer shwioasdhfj');
+    console.log('after success');
+}
+
+function updateData(){
+    setInterval(function(){
+        getLiveData();       
+    },15000);    
 }
