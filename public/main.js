@@ -4,6 +4,10 @@ $(document).ready(function(){
     $('#login-form-id').show();
 });
 
+// setInterval(function(){
+
+// },10000);
+
 $('#login-btn-id').click( ()=>{
     let userName = $('#input-user-id').val();
     let password = $('#input-password-id').val();
@@ -29,6 +33,8 @@ $('#login-btn-id').click( ()=>{
                 if(res.error == 0){
                     hideForms();
                     getLiveData();
+                    
+                    $('#liveData-form-id').show();
                     $('#chartContainer').show();
                     $('#logout-id').show();
                     $('#input-user-id').val('');
@@ -147,6 +153,8 @@ function hideForms(){
     $('#confirm-reset-pass-btn-id').hide();
     $('#chartContainer').hide();
     $('#logout-id').hide();
+    $('#liveData-form-id').hide();
+
 }
 
 
@@ -206,6 +214,7 @@ function getLiveData(){
         async:true,
         success:function(response){
 
+
             let entries = response;
             for (let index = 0; index < entries.length; index++) {
                 console.log(entries[index])
@@ -216,22 +225,26 @@ function getLiveData(){
             console.log('options:',options);
             var chart = new CanvasJS.Chart("chartContainer", options);
             chart.render();
-            // $("#chartContainer").CanvasJSChart(options);
-            setInterval(function(){
-                let x = Math.round(Math.random()*2);
-                let y = Math.round(Math.random()*3);
-                options.data[0].dataPoints.push({
-                        x:options.data[0].dataPoints[options.data[0].dataPoints.length-1].x +x ,
-                        y:options.data[0].dataPoints[options.data[0].dataPoints.length-1].y +x+1});
-                options.data[1].dataPoints.push({
-                        x:options.data[1].dataPoints[options.data[1].dataPoints.length-1].x +x ,
-                        y:options.data[1].dataPoints[options.data[1].dataPoints.length-1].y +y+1 });
-                        // $("#chartContainer").CanvasJSChart(options);
-                        options.data[0].dataPoints.shift();
-                        options.data[1].dataPoints.shift();
-                        chart.render();
 
-            },1500);
+            $('#temprature-id').html(entries[entries.length-1].temp + " C°");
+            $('#humidity-id').html(entries[entries.length-1].hum  + " %");
+            $('#speed-id').html(entries[entries.length-1].duty + " rpm");
+            // $("#chartContainer").CanvasJSChart(options);
+            // setInterval(function(){
+            //     let x = Math.round(Math.random()*2);
+            //     let y = Math.round(Math.random()*3);
+            //     options.data[0].dataPoints.push({
+            //             x:options.data[0].dataPoints[options.data[0].dataPoints.length-1].x +x ,
+            //             y:options.data[0].dataPoints[options.data[0].dataPoints.length-1].y +x+1});
+            //     options.data[1].dataPoints.push({
+            //             x:options.data[1].dataPoints[options.data[1].dataPoints.length-1].x +x ,
+            //             y:options.data[1].dataPoints[options.data[1].dataPoints.length-1].y +y+1 });
+            //             // $("#chartContainer").CanvasJSChart(options);
+            //             options.data[0].dataPoints.shift();
+            //             options.data[1].dataPoints.shift();
+            //             chart.render();
+
+            // },1500);
         },
         error: function(xhr,status,error){
             console.log(`

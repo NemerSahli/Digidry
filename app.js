@@ -185,15 +185,15 @@ app.get('/activate',(req,res)=>{
 });
 
 app.get('/getdata', (req,res)=>{
-    fs.readFile(fileESPtempHum, 'utf-8',
-        (err,data)=>{
-            if(err) return res.send({err:err})
-            return res.send(JSON.parse(data));
-        });
-    // axios.get("http://nodeapps.vulkanclub.tech/getdata").then(response=>{
-        // console.log("data",response.data);
-    //     res.json(response.data);
-    // });
+    // fs.readFile(fileESPtempHum, 'utf-8',
+    //     (err,data)=>{
+    //         if(err) return res.send({err:err})
+    //         return res.send(JSON.parse(data));
+    //     });
+    axios.get("http://nodeapps.vulkanclub.tech/getdata").then(response=>{
+        console.log("data",response.data);
+        res.json(response.data);
+    });
 });
 
 app.get('/logout',(req,res)=>{
