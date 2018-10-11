@@ -22,10 +22,10 @@ $('#login-btn-id').click( ()=>{
             data:  JSON.stringify(user),
             dataType: 'json',
             contentType:'application/json',
-            
+
             success:function(res){
                 console.log('response',res);
-             
+
                 if(res.error == 0){
                     hideForms();
                     getLiveData();
@@ -35,7 +35,7 @@ $('#login-btn-id').click( ()=>{
                     $('#input-password-id').val('');
 
                 }else if(res.error == 2){
-                    alert(res.result);                        
+                    alert(res.result);
                 }else{
                     alert('Invalid User or wrong password', res.result);
                 }
@@ -45,7 +45,7 @@ $('#login-btn-id').click( ()=>{
                             status:${status},
                             xhr:${JSON.stringify(xhr)}`);
             }
-        }); 
+        });
     }
 });
 
@@ -70,7 +70,7 @@ $('#register-btn-id').click( ()=>{
             data:  JSON.stringify(newUser),
             dataType: 'json',
             contentType:'application/json',
-            
+
             success:function(res){
                 console.log('response',res);
                 if (res.error == 101){
@@ -170,7 +170,7 @@ var options = {
     },
     data: [
     {
-            type: "splineArea", 
+            type: "splineArea",
             showInLegend: true,
             name: "Humidity %",
             yValueFormatString: "##",
@@ -196,23 +196,23 @@ function getLiveData(){
 
     console.log('whatever');
     $.ajax({
-        
+
         // url:'http://nodeapps.vulkanclub.tech/getdata',
         // url:'http://35.156.88.18:3050/users',
-        url:'/getData',
+        url:'/getdata',
         type: 'GET',
         // contentType: 'json/application',
         dataType: 'json',
         async:true,
         success:function(response){
-       
-            let entries = JSON.parse(response);
-            for (let index = entries.length-100; index < entries.length; index++) {
+
+            let entries = response;
+            for (let index = 0; index < entries.length; index++) {
                 console.log(entries[index])
                 options.data[0].dataPoints.push({ x:index,  y:parseInt(entries[index].hum)});
                 options.data[1].dataPoints.push({ x:index,  y:parseInt(entries[index].temp)});
             }
-            
+
             console.log('options:',options);
             var chart = new CanvasJS.Chart("chartContainer", options);
             chart.render();
@@ -220,7 +220,7 @@ function getLiveData(){
             setInterval(function(){
                 let x = Math.round(Math.random()*2);
                 let y = Math.round(Math.random()*3);
-                options.data[0].dataPoints.push({ 
+                options.data[0].dataPoints.push({
                         x:options.data[0].dataPoints[options.data[0].dataPoints.length-1].x +x ,
                         y:options.data[0].dataPoints[options.data[0].dataPoints.length-1].y +x+1});
                 options.data[1].dataPoints.push({
@@ -238,7 +238,7 @@ function getLiveData(){
             error:${error},
             status:${status},
             xhr:${JSON.stringify(xhr)}
-            `);   
+            `);
         }
 
     });
