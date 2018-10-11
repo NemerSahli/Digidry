@@ -5,12 +5,15 @@ const cookieParser = require('cookie-parser');
 const fs = require('fs');
 const axios= require('axios');
 
+const fileESPtempHum = __dirname + '/esp32data.json';
+const fileESPduty = __dirname + '/esp32duty.json';
+
 const port = process.env.port || 8080;
 
 // const bcrypt = require('bcrypt');
 
 var nodemailer = require('nodemailer');
-var mailSender = require('./mailSender.js')
+var mailSender = require('./mailSender.js');
 
 const app = express();
 app.use('/',express.static(__dirname+'/public'));
@@ -181,6 +184,7 @@ app.get('/activate',(req,res)=>{
     }
 });
 
+<<<<<<< HEAD
 app.get('/getData',auth,(req,res)=>{
     fs.readFile(__dirname + '/esp32.json', 'utf-8',
         (err,data)=>{
@@ -191,6 +195,18 @@ app.get('/getData',auth,(req,res)=>{
     //     // console.log("data",response.data);
     //     res.json(response.data);
     // });
+=======
+app.get('/getdata', (req,res)=>{
+    // fs.readFile(fileESPtempHum, 'utf-8',
+    //     (err,data)=>{
+    //         if(err) return res.send({err:err})
+    //         return res.send(JSON.parse(data));
+    //     });
+    axios.get("http://nodeapps.vulkanclub.tech/getdata").then(response=>{
+        console.log("data",response.data);
+        res.json(response.data);
+    });
+>>>>>>> Nemer-branch
 });
 
 app.get('/logout',(req,res)=>{
@@ -211,8 +227,6 @@ function auth(req,res,next){
 //
 // app.set('view engine', 'ejs');
 
-const fileESPtempHum = __dirname + '/esp32data.json';
-const fileESPduty = __dirname + '/esp32duty.json';
 
 // app.get('/',(req, res) => {
 //   res.render('index');

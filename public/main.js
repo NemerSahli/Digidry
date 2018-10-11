@@ -4,6 +4,10 @@ $(document).ready(function(){
     $('#login-form-id').show();
 });
 
+// setInterval(function(){
+
+// },10000);
+
 $('#login-btn-id').click( ()=>{
     let userName = $('#input-user-id').val();
     let password = $('#input-password-id').val();
@@ -22,20 +26,22 @@ $('#login-btn-id').click( ()=>{
             data:  JSON.stringify(user),
             dataType: 'json',
             contentType:'application/json',
-            
+
             success:function(res){
                 console.log('response',res);
-             
+
                 if(res.error == 0){
                     hideForms();
                     getLiveData();
+                    
+                    $('#liveData-form-id').show();
                     $('#chartContainer').show();
                     $('#logout-id').show();
                     $('#input-user-id').val('');
                     $('#input-password-id').val('');
 
                 }else if(res.error == 2){
-                    alert(res.result);                        
+                    alert(res.result);
                 }else{
                     alert('Invalid User or wrong password', res.result);
                 }
@@ -45,7 +51,7 @@ $('#login-btn-id').click( ()=>{
                             status:${status},
                             xhr:${JSON.stringify(xhr)}`);
             }
-        }); 
+        });
     }
 });
 
@@ -70,7 +76,7 @@ $('#register-btn-id').click( ()=>{
             data:  JSON.stringify(newUser),
             dataType: 'json',
             contentType:'application/json',
-            
+
             success:function(res){
                 console.log('response',res);
                 if (res.error == 101){
@@ -147,6 +153,8 @@ function hideForms(){
     $('#confirm-reset-pass-btn-id').hide();
     $('#chartContainer').hide();
     $('#logout-id').hide();
+    $('#liveData-form-id').hide();
+
 }
 
 
@@ -170,7 +178,7 @@ var options = {
     },
     data: [
     {
-            type: "splineArea", 
+            type: "splineArea",
             showInLegend: true,
             name: "Humidity %",
             yValueFormatString: "##",
@@ -196,27 +204,39 @@ function getLiveData(){
 
     console.log('whatever');
     $.ajax({
-        
+
         // url:'http://nodeapps.vulkanclub.tech/getdata',
         // url:'http://35.156.88.18:3050/users',
-        url:'/getData',
+        url:'/getdata',
         type: 'GET',
         // contentType: 'json/application',
         dataType: 'json',
         async:true,
         success:function(response){
+<<<<<<< HEAD
        
             let entries = response;
             for (let index = entries.length-100; index < entries.length; index++) {
+=======
+
+
+            let entries = response;
+            for (let index = 0; index < entries.length; index++) {
+>>>>>>> Nemer-branch
                 console.log(entries[index])
                 options.data[0].dataPoints.push({ x:index,  y:parseInt(entries[index].hum)});
                 options.data[1].dataPoints.push({ x:index,  y:parseInt(entries[index].temp)});
             }
-            
+
             console.log('options:',options);
             var chart = new CanvasJS.Chart("chartContainer", options);
             chart.render();
+
+            $('#temprature-id').html(entries[entries.length-1].temp + " C°");
+            $('#humidity-id').html(entries[entries.length-1].hum  + " %");
+            $('#speed-id').html(entries[entries.length-1].duty + " rpm");
             // $("#chartContainer").CanvasJSChart(options);
+<<<<<<< HEAD
             setInterval(function(){
                 // let x = Math.round(Math.random()*2);
                 // let y = Math.round(Math.random()*3);
@@ -232,13 +252,30 @@ function getLiveData(){
                 //         chart.render();
 
             },1500);
+=======
+            // setInterval(function(){
+            //     let x = Math.round(Math.random()*2);
+            //     let y = Math.round(Math.random()*3);
+            //     options.data[0].dataPoints.push({
+            //             x:options.data[0].dataPoints[options.data[0].dataPoints.length-1].x +x ,
+            //             y:options.data[0].dataPoints[options.data[0].dataPoints.length-1].y +x+1});
+            //     options.data[1].dataPoints.push({
+            //             x:options.data[1].dataPoints[options.data[1].dataPoints.length-1].x +x ,
+            //             y:options.data[1].dataPoints[options.data[1].dataPoints.length-1].y +y+1 });
+            //             // $("#chartContainer").CanvasJSChart(options);
+            //             options.data[0].dataPoints.shift();
+            //             options.data[1].dataPoints.shift();
+            //             chart.render();
+
+            // },1500);
+>>>>>>> Nemer-branch
         },
         error: function(xhr,status,error){
             console.log(`
             error:${error},
             status:${status},
             xhr:${JSON.stringify(xhr)}
-            `);   
+            `);
         }
 
     });
