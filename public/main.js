@@ -213,16 +213,9 @@ function getLiveData(){
         dataType: 'json',
         async:true,
         success:function(response){
-<<<<<<< HEAD
        
             let entries = response;
             for (let index = entries.length-100; index < entries.length; index++) {
-=======
-
-
-            let entries = response;
-            for (let index = 0; index < entries.length; index++) {
->>>>>>> Nemer-branch
                 console.log(entries[index])
                 options.data[0].dataPoints.push({ x:index,  y:parseInt(entries[index].hum)});
                 options.data[1].dataPoints.push({ x:index,  y:parseInt(entries[index].temp)});
@@ -236,8 +229,7 @@ function getLiveData(){
             $('#humidity-id').html(entries[entries.length-1].hum  + " %");
             $('#speed-id').html(entries[entries.length-1].duty + " rpm");
             // $("#chartContainer").CanvasJSChart(options);
-<<<<<<< HEAD
-            setInterval(function(){
+            // setInterval(function(){
                 // let x = Math.round(Math.random()*2);
                 // let y = Math.round(Math.random()*3);
                 // options.data[0].dataPoints.push({ 
@@ -251,24 +243,7 @@ function getLiveData(){
                 //         options.data[1].dataPoints.shift();
                 //         chart.render();
 
-            },1500);
-=======
-            // setInterval(function(){
-            //     let x = Math.round(Math.random()*2);
-            //     let y = Math.round(Math.random()*3);
-            //     options.data[0].dataPoints.push({
-            //             x:options.data[0].dataPoints[options.data[0].dataPoints.length-1].x +x ,
-            //             y:options.data[0].dataPoints[options.data[0].dataPoints.length-1].y +x+1});
-            //     options.data[1].dataPoints.push({
-            //             x:options.data[1].dataPoints[options.data[1].dataPoints.length-1].x +x ,
-            //             y:options.data[1].dataPoints[options.data[1].dataPoints.length-1].y +y+1 });
-            //             // $("#chartContainer").CanvasJSChart(options);
-            //             options.data[0].dataPoints.shift();
-            //             options.data[1].dataPoints.shift();
-            //             chart.render();
-
             // },1500);
->>>>>>> Nemer-branch
         },
         error: function(xhr,status,error){
             console.log(`
