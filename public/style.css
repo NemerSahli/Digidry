@@ -14,3 +14,6 @@ body{
     position: fixed;
     bottom: 30px;
 }
+#liveData-form-id{
+    margin: auto;
+}

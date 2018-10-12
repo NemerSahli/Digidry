@@ -209,10 +209,8 @@ function getLiveData(){
     $.ajax({
 
         // url:'http://nodeapps.vulkanclub.tech/getdata',
-        // url:'http://35.156.88.18:3050/users',
         url:'/getdata',
         type: 'GET',
-        // contentType: 'json/application',
         dataType: 'json',
         async:true,
         success:function(response){
@@ -232,13 +230,12 @@ function getLiveData(){
             }
 
             console.log('options:',options);
-
+            // $("#chartContainer").CanvasJSChart(options);
             chart.render();
 
             $('#temprature-id').html(entries[entries.length-1].temp + " C°");
             $('#humidity-id').html(entries[entries.length-1].hum  + " %");
             $('#speed-id').html(entries[entries.length-1].duty + " rpm");
-            // $("#chartContainer").CanvasJSChart(options);
          
         },
         error: function(xhr,status,error){
