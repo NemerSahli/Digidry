@@ -183,6 +183,7 @@ var options = {
             showInLegend: true,
             name: "Humidity %",
             yValueFormatString: "##",
+
             dataPoints: [
                 // { x: 1, y: 35 },
             ]
@@ -202,10 +203,10 @@ var options = {
 };
 
 var chart = new CanvasJS.Chart("chartContainer", options);
+let previousHash = '';
+let counter = 0;
 
 function getLiveData() {
-
-    console.log('whatever');
     $.ajax({
 
         // url:'http://nodeapps.vulkanclub.tech/getdata',
@@ -213,25 +214,25 @@ function getLiveData() {
         type: 'GET',
         dataType: 'json',
         async: true,
-        success: function (response) {
+        success: function (entries) {
 
-            let entries = response;
-            console.log(response);
             let startIndex = 0;
             if (entries.length > 100) {
                 startIndex = entries.length - 100;
             }
-            console.log(entries.length + ' ' + startIndex);
             options.data[0].dataPoints = [];
             options.data[1].dataPoints = [];
 
             for (let index = startIndex; index < entries.length; index++) {
+                let entryTime = entries[index].lastEntry;
+                entryTime = entryTime.slice(11, 19);
                 options.data[0].dataPoints.push({ x: index, y: parseInt(entries[index].hum) });
                 options.data[1].dataPoints.push({ x: index, y: parseInt(entries[index].temp) });
             }
-
-            console.log('options:', options);
             chart.render();
+            // let entryTime = entries[entries.length - 1].lastEntry;
+            // console.log('entryTime:', entryTime);
+            // entryTime = entryTime.slice(11, 19);
 
             $('#temprature-id').html(entries[entries.length - 1].temp + " C°");
             $('#humidity-id').html(entries[entries.length - 1].hum + " %");
@@ -245,9 +246,7 @@ function getLiveData() {
             xhr:${JSON.stringify(xhr)}
             `);
         }
-
     });
-    console.log('after success');
 }
 
 function updateData() {

@@ -48,14 +48,11 @@ app.post('/login', (req, res) => {
                     req.session.admin = true;
                     console.log(JSON.stringify(req.session));
                     return res.send({ error: 0, result: users[i] });
-
                 }
             }
             return res.send({ error: 2, result: "user not found" });
         });
 });
-
-
 
 app.post('/reset-pass', (req, res) => {
     console.log('reset password...');
@@ -82,7 +79,6 @@ app.post('/reset-pass', (req, res) => {
         } else {
             return res.send({ error: 250, data: "you should confirm the email you got to reset your password" });
         }
-
     });
 });
 
@@ -93,10 +89,7 @@ app.post('/register', (req, res) => {
         return res.send('username and password required');
     }
 
-
-
     let activeKey = randomstring.generate(20);
-
 
     let newUser = {
         username: req.body.username,
@@ -123,11 +116,6 @@ app.post('/register', (req, res) => {
                 return res.send({ error: 0, data: "new user has been sent" });
             })
         });
-
-
-
-
-
 });
 
 app.post('/reset', (req, res) => {
@@ -212,14 +200,6 @@ function auth(req, res, next) {
 }
 //  NIKo CODE:-
 
-//
-// app.set('view engine', 'ejs');
-
-
-// app.get('/',(req, res) => {
-//   res.render('index');
-// });
-//
 app.get('/test/:temp/:hum/:duty', (req, res) => {
     var getEspData =
         {
