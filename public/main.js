@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function () {
     console.log('document is ready...');
     hideForms();
     $('#login-form-id').show();
@@ -8,46 +8,46 @@ $(document).ready(function(){
 
 // },10000);
 
-$('#login-btn-id').click( ()=>{
+$('#login-btn-id').click(() => {
     let userName = $('#input-user-id').val();
     let password = $('#input-password-id').val();
 
-    if(userName == '' || password == '' ){
+    if (userName == '' || password == '') {
         alert('user and password required!');
-    }else{
-        let user={
+    } else {
+        let user = {
             username: $('#input-user-id').val(),
             password: $('#input-password-id').val()
         }
         console.log(user);
         $.ajax({
-            url:"login",
-             type: 'POST',
-            data:  JSON.stringify(user),
+            url: "login",
+            type: 'POST',
+            data: JSON.stringify(user),
             dataType: 'json',
-            contentType:'application/json',
+            contentType: 'application/json',
 
-            success:function(res){
-                console.log('response',res);
+            success: function (res) {
+                console.log('response', res);
 
-                if(res.error == 0){
+                if (res.error == 0) {
                     hideForms();
                     getLiveData();
                     updateData();
-                    
+
                     $('#liveData-form-id').show();
                     $('#chartContainer').show();
                     $('#logout-id').show();
                     $('#input-user-id').val('');
                     $('#input-password-id').val('');
 
-                }else if(res.error == 2){
+                } else if (res.error == 2) {
                     alert(res.result);
-                }else{
+                } else {
                     alert('Invalid User or wrong password', res.result);
                 }
             },
-            error: function(xhr,status,error){
+            error: function (xhr, status, error) {
                 console.log(`error:${error},
                             status:${status},
                             xhr:${JSON.stringify(xhr)}`);
@@ -56,43 +56,43 @@ $('#login-btn-id').click( ()=>{
     }
 });
 
-$('#register-btn-id').click( ()=>{
+$('#register-btn-id').click(() => {
     let userName = $('#input-register-user-id').val();
     let password = $('#input-register-password-id').val();
     let confirmPassword = $('#input-register-confirm-password-id').val();
 
 
-    if(userName == '' || password == '' || confirmPassword == '' ){
+    if (userName == '' || password == '' || confirmPassword == '') {
         alert('user and password required!');
-    }else if(password == confirmPassword){
+    } else if (password == confirmPassword) {
 
-        let newUser={
+        let newUser = {
             username: userName,
             password: password
         }
 
         $.ajax({
-            url:"register",
-             type: 'POST',
-            data:  JSON.stringify(newUser),
+            url: "register",
+            type: 'POST',
+            data: JSON.stringify(newUser),
             dataType: 'json',
-            contentType:'application/json',
+            contentType: 'application/json',
 
-            success:function(res){
-                console.log('response',res);
-                if (res.error == 101){
+            success: function (res) {
+                console.log('response', res);
+                if (res.error == 101) {
                     alert("This email exist, please signup with other one");
-                } else if(res.error == 0){
+                } else if (res.error == 0) {
                     hideForms();
                     $('#login-form-id').show();
 
                     alert('Thank You for registration!');
                     // $('#inputTime').val();
-                }else{
+                } else {
                     alert('Invalid User or wrong password', res.result);
                 }
             },
-            error: function(xhr,status,error){
+            error: function (xhr, status, error) {
                 console.log(`
                 error:${error},
                 status:${status},
@@ -103,41 +103,41 @@ $('#register-btn-id').click( ()=>{
     }
 });
 
-$("#forgetPassword-id").click( ()=>{
+$("#forgetPassword-id").click(() => {
     console.log('forget password clicked...');
     $('#login-form-id').hide();
     $('#forgetPassword-form-id').show();
 });
 
-$('#register-form-login-btn-id').click(()=>{
+$('#register-form-login-btn-id').click(() => {
     $('#login-form-id').show();
     $('#register-form-id').hide();
 });
 
-$('#forget-password-form-login-id').click(()=>{
+$('#forget-password-form-login-id').click(() => {
     $('#login-form-id').show();
     $('#forgetPassword-form-id').hide();
 });
 
-$('#login-form-register-btn-id').click(()=>{
+$('#login-form-register-btn-id').click(() => {
     $('#login-form-id').hide();
     $('#register-form-id').show();
     $('#register-btn-id').show();
 });
 
-$('#logout-btn-id').click(()=>{
+$('#logout-btn-id').click(() => {
     console.log('Logout btn clicked...');
 
     $.ajax({
-        url:"/logout",
+        url: "/logout",
         type: 'GET',
         dataType: 'json',
-        success:function(response){
-            console.log('response',response);
+        success: function (response) {
+            console.log('response', response);
             hideForms();
             $('#login-form-id').show();
         },
-        error: function(xhr,status,error){
+        error: function (xhr, status, error) {
             console.log(`
             error:${error},
             status:${status},
@@ -147,7 +147,7 @@ $('#logout-btn-id').click(()=>{
     });
 });
 
-function hideForms(){
+function hideForms() {
     $('#login-form-id').hide();
     $('#register-form-id').hide();
     $('#forgetPassword-form-id').hide();
@@ -163,10 +163,10 @@ function hideForms(){
 var options = {
     animationEnabled: true,
     theme: "dark1",
-    title:{
+    title: {
         text: ""
     },
-    axisY :{
+    axisY: {
         includeZero: false,
         prefix: "C° - % ",
         lineThickness: 0
@@ -178,7 +178,7 @@ var options = {
         fontSize: 15
     },
     data: [
-    {
+        {
             type: "splineArea",
             showInLegend: true,
             name: "Humidity %",
@@ -186,7 +186,7 @@ var options = {
             dataPoints: [
                 // { x: 1, y: 35 },
             ]
-         },
+        },
         {
             type: "splineArea",
             showInLegend: true,
@@ -196,49 +196,49 @@ var options = {
             dataPoints: [
                 // { x: 1, y: 40 },
             ]
-         }
-         
-        ]
-    };
-    
-var  chart = new CanvasJS.Chart("chartContainer", options);
-    
-function getLiveData(){
+        }
+
+    ]
+};
+
+var chart = new CanvasJS.Chart("chartContainer", options);
+
+function getLiveData() {
 
     console.log('whatever');
     $.ajax({
 
         // url:'http://nodeapps.vulkanclub.tech/getdata',
-        url:'/getdata',
+        url: '/getdata',
         type: 'GET',
         dataType: 'json',
-        async:true,
-        success:function(response){
-       
+        async: true,
+        success: function (response) {
+
             let entries = response;
             console.log(response);
             let startIndex = 0;
-            if(entries.length > 100){
-                startIndex = entries.length -100;
+            if (entries.length > 100) {
+                startIndex = entries.length - 100;
             }
-            console.log(entries.length + ' ' + startIndex );
+            console.log(entries.length + ' ' + startIndex);
             options.data[0].dataPoints = [];
             options.data[1].dataPoints = [];
 
             for (let index = startIndex; index < entries.length; index++) {
-                options.data[0].dataPoints.push({ x:index,  y:parseInt(entries[index].hum)});
-                options.data[1].dataPoints.push({ x:index,  y:parseInt(entries[index].temp)});
+                options.data[0].dataPoints.push({ x: index, y: parseInt(entries[index].hum) });
+                options.data[1].dataPoints.push({ x: index, y: parseInt(entries[index].temp) });
             }
 
-            console.log('options:',options);
+            console.log('options:', options);
             chart.render();
 
-            $('#temprature-id').html(entries[entries.length-1].temp + " C°");
-            $('#humidity-id').html(entries[entries.length-1].hum  + " %");
-            $('#speed-id').html(entries[entries.length-1].duty + " rpm");
-         
+            $('#temprature-id').html(entries[entries.length - 1].temp + " C°");
+            $('#humidity-id').html(entries[entries.length - 1].hum + " %");
+            $('#speed-id').html(entries[entries.length - 1].duty + " rpm");
+
         },
-        error: function(xhr,status,error){
+        error: function (xhr, status, error) {
             console.log(`
             error:${error},
             status:${status},
@@ -250,8 +250,8 @@ function getLiveData(){
     console.log('after success');
 }
 
-function updateData(){
-    setInterval(function(){
-        getLiveData();       
-    },15000);    
+function updateData() {
+    setInterval(function () {
+        getLiveData();
+    }, 15000);
 }
