@@ -164,7 +164,7 @@ var options = {
     animationEnabled: true,
     theme: "dark1",
     title:{
-        text: "Fruits Dryer"
+        text: ""
     },
     axisY :{
         includeZero: false,
@@ -216,6 +216,7 @@ function getLiveData(){
         success:function(response){
        
             let entries = response;
+            console.log(response);
             let startIndex = 0;
             if(entries.length > 100){
                 startIndex = entries.length -100;
@@ -230,7 +231,6 @@ function getLiveData(){
             }
 
             console.log('options:',options);
-            // $("#chartContainer").CanvasJSChart(options);
             chart.render();
 
             $('#temprature-id').html(entries[entries.length-1].temp + " C°");

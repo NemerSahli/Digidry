@@ -11,18 +11,23 @@
         <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     </head>
 <body>
-        <div class="" id="logo"><img src="images/Union.svg"></img> </div>
+       
 
         <!-- ************************************ -->
     <!-- Login Form -->
         <div class="row justify-content-center mt-5" id="login-form-id">
-            <div class="col-4 form-group login-form border border-secondary rounded p-3" >
+                <div class="col-12  mb-5">
+                    <div class="row justify-content-center">
+                        <img class="" src="images/Union.svg"></img>
+                    </div>
+                </div> 
+            <div class="col-8 col-sm-7 col-md-6  form-group login-form border border-secondary rounded p-3" >
                 <div class="form-group">
-                    <label for="email" class="text-white">Email</label>
+                    <label for="email" class="text-white">Email:</label>
                     <input type="email" class="form-control" id="input-user-id" aria-describedby="emailHelp" placeholder="Enter your Email">
                 </div>
                 <div class="form-group">
-                    <label for="password" class="text-white" >Password</label>
+                    <label for="password" class="text-white" >Password:</label>
                     <input type="password" class="form-control" id="input-password-id" placeholder="Password">
                 </div>
                 <a href="#" id="login-form-register-btn-id" class="mr-2">Sign up</a>
@@ -38,15 +43,15 @@
         <div class="row justify-content-center mt-5" id="register-form-id">
             <div class="col-4 form-group register-form border border-secondary rounded p-3" >
                 <div class="form-group">
-                    <label class="text-white">Email</label>
+                    <label class="text-white">Email:</label>
                     <input type="email" class="form-control" id="input-register-user-id" aria-describedby="emailHelp" placeholder="Enter your email">
                 </div>
                 <div class="form-group">
-                    <label class="text-white">Password</label>
+                    <label class="text-white">Password:</label>
                     <input type="password" class="form-control" id="input-register-password-id" placeholder="Password">
                 </div>
                 <div class="form-group">
-                    <label class="text-white">Confirm password</label>
+                    <label class="text-white">Confirm password:</label>
                     <input type="password" class="form-control" id="input-register-confirm-password-id" placeholder="Confirm Password">
                 </div>
                 <a href="#" id="register-form-login-btn-id">Login</a> <br>
@@ -71,8 +76,14 @@
 
       <!-- ************************************ -->
      <!-- live data Form device -->
-     <div class="row justify-content-center" id="liveData-form-id">
-        <div class="col-4 form-group border border-secondary rounded p-3" >
+     <div class="row justify-content-center mt-1" id="liveData-form-id"> 
+            <div class="col-12  mb-5">
+                    <div class="row justify-content-center">
+                        <img class="" src="images/Union.svg"></img>
+                    </div>
+                </div> 
+        <div class=" col-4 col-md-4 col-sm-6 form-group border border-secondary rounded p-1" >
+            
             <div class="form-group">
                 <label for="Temprature" class="text-white" style="opacity: 0.6;">Temprature:</label>
                 <span class="text-danger" style="opacity: 0.6;" id="temprature-id"></span>
