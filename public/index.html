@@ -87,12 +87,12 @@
 
     <!-- ************************************ -->
     <!-- Body Form -->
-    <div id="body-form-id" class="row p-3">
+    <div id="body-form-id" class="row justify-content-center p-3">
         <div class=" col-10">
             <img class="col-5 col-sm-4 col-md-3 col-lg-2" src="images/Union.svg"></img>
         </div>
 
-        <div class="row col-12">
+        <div class="row col-12 mt-4">
             <div class="col-12">
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -112,22 +112,57 @@
             </div>
             <div class="tab-content col-12" id="myTabContent">
                 <div class=" tab-pane fade show active" id="device" role="tabpanel" aria-labelledby="device-tab">
-                    <div class="col-12 form-group mt-3">
+                    <div class="row col-12 justify-content-center form-group mt-3 m-auto">
 
-                        <div class="form-group">
-                            <label for="Temprature" class="text-white" style="opacity: 0.6;">Temprature:</label>
-                            <span class="text-danger" style="opacity: 0.6;" id="temprature-id"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="Humidty" class="text-white" style="opacity: 0.6;">Humidity:</label>
-                            <span class="text-primary" style="opacity: 0.6;" id="humidity-id"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="speed" class="text-white " style="opacity: 0.6;">Fan Speed:</label>
-                            <span class="text-white" style="opacity: 0.6;" id="speed-id"></span>
-                        </div>
+                        <table style="opacity: 0.6;" class="col-7 col-sm-6 col-md-7 text-white table table-sm table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Device Details</th>
+                                    <th>Value</th>
+                                    <th>Unit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Name:</td>
+                                    <td id="device-name-id">Apple-Dryer-2018</td>
+                                    <td>
+                                        <img src="images/380514.png" alt="Apple-Dryer-2018" width="30px" height="30px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Temprature:</td>
+                                    <td id="temprature-id"></td>
+                                    <td>C°</td>
+                                </tr>
+                                <tr>
+                                    <td>Humidity:</td>
+                                    <td id="humidity-id"></td>
+                                    <td>%</td>
+                                </tr>
+                                <tr>
+                                    <td>Fan Speed:</td>
+                                    <td id="speed-id"></td>
+                                    <td>rpm</td>
+                                </tr>
+                                <tr>
+                                    <td>Status:</td>
+                                    <td id="status-id">offline</td>
+                                    <td>
+                                        <div id="status-color"></div>
+                                    </td>
+                                </tr>
 
+                            </tbody>
+                        </table>
+                        <div class="ml-auto col-8 col-sm-6 col-md-5 col-lg-4 col-xl-3">
+
+                            <img src="images/380514.png" id="device-qr-code" class="mr-auto mr-auto" alt="" width="50%" height="auto">
+                            <div class="text-white mb-3" style="opacity: 0,6;"> Device Qr-Code:</div>
+
+                        </div>
                     </div>
+
                     <!-- chart area -->
                     <div class="row col-12" id="chart-body">
                         <p class="text-white" id="chart-units">C° / %</p>

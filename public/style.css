@@ -1,3 +1,12 @@
+/* @media only screen and (max-width: 600px) {
+  #myTabContent {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #fff;
+  }
+} */
+
 body {
   margin: 0;
   padding: 0;
@@ -21,5 +30,17 @@ body {
 #chart-units {
   position: relative;
   top: -10px;
-  left: 20px;
+  left: 10px;
+}
+table {
+  border: 1px solid rgba(197, 194, 194, 0.596);
+}
+#status-color {
+  background-color: rgba(255, 0, 0, 0.7);
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+}
+#device-qr-code {
+  border: 2px solid rgba(197, 194, 194, 0.596);
 }
