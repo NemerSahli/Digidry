@@ -18,12 +18,14 @@
 
     <!-- ************************************ -->
     <!-- Login Form -->
-    <div class="row justify-content-center mt-5" id="login-form-id">
-        <div class="col-12  mb-5">
-            <div class="row justify-content-center">
-                <img class="" src="images/Union.svg"></img>
-            </div>
+
+    <div class=" row justify-content-center mt-3" id="login-logo">
+        <div class="col-5 col-sm-4 col-md-3">
+            <img class="w-100" src="images/Union.svg"></img>
         </div>
+    </div>
+
+    <div class="row justify-content-center mt-5" id="login-form-id">
         <div class="col-8 col-sm-7 col-md-6  form-group login-form border border-secondary rounded p-3">
             <div class="form-group">
                 <label for="email" class="text-white">Email:</label>
@@ -39,11 +41,14 @@
             <button type="button" class=" btn btn-primary mt-3" id="login-btn-id">Login</button>
         </div>
     </div>
+
+
     <div class="form-inline" id="logout-id">
         <button class="btn btn-outline-secondary my-2 my-sm-0" id="logout-btn-id">
             <span class="h5 ion-log-out text-danger"></span>
         </button>
     </div>
+
     <!-- ********************************************************* -->
     <!-- signup Form -->
     <div class="row justify-content-center mt-5" id="register-form-id">
@@ -79,39 +84,39 @@
             <button type="button" class=" btn btn-primary mt-3" id="forget-password-form-send-btn-id">Send</button>
         </div>
     </div>
-    <!-- *********************************************************** -->
-    <!-- chart area -->
-    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 
     <!-- ************************************ -->
     <!-- live data Form device -->
-    <div class="row justify-content-center mt-1" id="liveData-form-id">
-        <div class="col-12  mb-5">
-            <div class="row justify-content-center">
-                <img class="" src="images/Union.svg"></img>
-            </div>
+    <div id="liveData-form-id" class="row mt-3">
+
+        <div class="col-1">
+            <img class="" src="images/Union.svg"></img>
         </div>
-        <div class=" col-4 col-md-4 col-sm-6 form-group border border-secondary rounded p-1">
 
-            <div class="form-group">
-                <label for="Temprature" class="text-white" style="opacity: 0.6;">Temprature:</label>
-                <span class="text-danger" style="opacity: 0.6;" id="temprature-id"></span>
-            </div>
-            <div class="form-group">
-                <label for="Humidty" class="text-white" style="opacity: 0.6;">Humidity:</label>
-                <span class="text-primary" style="opacity: 0.6;" id="humidity-id"></span>
-            </div>
-            <div class="form-group">
-                <label for="speed" class="text-white " style="opacity: 0.6;">Fan Speed:</label>
-                <span class="text-white" style="opacity: 0.6;" id="speed-id"></span>
-            </div>
+        <div class="col-10 row justify-content-center mt-3">
+            <div class=" col-4 col-md-4 col-sm-6 form-group border border-secondary rounded p-1">
 
+                <div class="form-group">
+                    <label for="Temprature" class="text-white" style="opacity: 0.6;">Temprature:</label>
+                    <span class="text-danger" style="opacity: 0.6;" id="temprature-id"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Humidty" class="text-white" style="opacity: 0.6;">Humidity:</label>
+                    <span class="text-primary" style="opacity: 0.6;" id="humidity-id"></span>
+                </div>
+                <div class="form-group">
+                    <label for="speed" class="text-white " style="opacity: 0.6;">Fan Speed:</label>
+                    <span class="text-white" style="opacity: 0.6;" id="speed-id"></span>
+                </div>
+
+            </div>
         </div>
     </div>
+    <!-- *********************************************************** -->
+    <!-- chart area -->
 
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
     <!-- ********************************************************* -->
-
-
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
