@@ -86,7 +86,7 @@
     </div>
 
     <!-- ************************************ -->
-    <!-- live data Form device -->
+    <!-- Body Form -->
     <div id="body-form-id" class="row p-3">
         <div class=" col-10">
             <img class="col-5 col-sm-4 col-md-3 col-lg-2" src="images/Union.svg"></img>
@@ -110,9 +110,8 @@
                     </li>
                 </ul>
             </div>
-            <div class="tab-content row col-12" id="myTabContent">
+            <div class="tab-content col-12" id="myTabContent">
                 <div class=" tab-pane fade show active" id="device" role="tabpanel" aria-labelledby="device-tab">
-                    <!-- <div class="row mt-3"> -->
                     <div class="col-12 form-group mt-3">
 
                         <div class="form-group">
@@ -129,11 +128,20 @@
                         </div>
 
                     </div>
+                    <!-- chart area -->
+                    <div class="row col-12" id="chart-body">
+                        <p class="text-white" id="chart-units">C° / %</p>
+                        <div id="chartContainer" class="p-3" style="height: 370px; width: 100%;"></div>
+                    </div>
                 </div>
-                <!-- </div> -->
+
+                <!-- *********************************************************** -->
                 <div class="tab-pane  fade text-white " id="add-device" role="tabpanel" aria-labelledby="add-device-tab">
 
+
                 </div>
+                <!-- ********************************************************* -->
+
                 <div class="tab-pane fade text-white" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 
                 </div>
@@ -141,13 +149,7 @@
         </div>
 
     </div>
-    <!-- *********************************************************** -->
-    <!-- chart area -->
-    <div id="chart-body">
-        <p class="text-white" id="chart-units">C° / %</p>
-        <div id="chartContainer" class="p-3" style="height: 370px; width: 100%;"></div>
-    </div>
-    <!-- ********************************************************* -->
+
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
