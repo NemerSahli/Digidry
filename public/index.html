@@ -89,11 +89,11 @@
     <!-- Body Form -->
     <div id="body-form-id" class="row justify-content-center p-3">
         <div class=" col-10">
-            <img class="col-5 col-sm-4 col-md-3 col-lg-2" src="images/Union.svg"></img>
+            <img id="logged-in-logo" class="col-5 col-sm-4 col-md-3 col-lg-2" src="images/Union.svg"></img>
         </div>
 
         <div class="row col-12 mt-4">
-            <div class="col-12">
+            <div class="col-12 mb-2">
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
@@ -105,14 +105,13 @@
                     <li class="nav-item">
                         <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
                     </li>
-                    <li class="nav-item" id="label-container-user-id">
-                        <a class="nav-link text-white " for="user" id="label-user-id"></a>
-                    </li>
+
                 </ul>
             </div>
             <div class="tab-content col-12" id="myTabContent">
                 <div class=" tab-pane fade show active" id="device" role="tabpanel" aria-labelledby="device-tab">
                     <div class="row col-12 justify-content-center form-group mt-3 m-auto">
+                        <a class="nav-link text-white col-12" for="user" id="label-user-id"></a>
 
                         <table style="opacity: 0.6;" class="col-7 col-sm-6 col-md-7 text-white table table-sm table-striped">
                             <thead>
@@ -127,7 +126,7 @@
                                     <td>Name:</td>
                                     <td id="device-name-id">Apple-Dryer-2018</td>
                                     <td>
-                                        <img src="images/380514.png" alt="Apple-Dryer-2018" width="30px" height="30px">
+                                        380514
                                     </td>
                                 </tr>
                                 <tr>
@@ -157,8 +156,8 @@
                         </table>
                         <div class="ml-auto col-8 col-sm-6 col-md-5 col-lg-4 col-xl-3">
 
-                            <img src="images/380514.png" id="device-qr-code" class="mr-auto mr-auto" alt="" width="50%" height="auto">
-                            <div class="text-white mb-3" style="opacity: 0,6;"> Device Qr-Code:</div>
+                            <img src="images/380514.png" id="device-qr-code" class="" alt="" width="50%" height="auto">
+                            <div class="text-white mb-3 mr-auto ml-auto" style="opacity: 0,6;"> Device Qr-Code</div>
 
                         </div>
                     </div>
