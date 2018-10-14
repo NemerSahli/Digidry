@@ -10,10 +10,16 @@ body {
   right: 25px;
   top: 20px;
 }
-/* #chartContainer {
+#chart-body {
   position: relative;
-  bottom: 0px;
-} */
-#liveData-form-id {
-  margin: auto;
+}
+#chartContainer {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+#chart-units {
+  position: relative;
+  top: -10px;
+  left: 20px;
 }

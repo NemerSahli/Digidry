@@ -38,7 +38,7 @@ $("#login-btn-id").click(() => {
           updateData();
 
           $("#liveData-form-id").show();
-          $("#chartContainer").show();
+          $("#chart-body").show();
           $("#logout-id").show();
           $("#input-user-id").val("");
           $("#input-password-id").val("");
@@ -152,7 +152,7 @@ function hideForms() {
   $("#register-form-id").hide();
   $("#forgetPassword-form-id").hide();
   $("#confirm-reset-pass-btn-id").hide();
-  $("#chartContainer").hide();
+  $("#chart-body").hide();
   $("#logout-id").hide();
   $("#liveData-form-id").hide();
   $("#login-logo").hide();
@@ -166,7 +166,7 @@ var options = {
   },
   axisY: {
     includeZero: false,
-    prefix: "C° - % ",
+    prefix: "",
     lineThickness: 0
   },
   toolTip: {
@@ -191,7 +191,6 @@ var options = {
       showInLegend: true,
       name: "Temprature C°",
       yValueFormatString: "##.##",
-      xValueFormatString: "MMM YYYY",
       dataPoints: [
         // { x: 1, y: 40 },
       ]
@@ -200,6 +199,7 @@ var options = {
 };
 
 var chart = new CanvasJS.Chart("chartContainer", options);
+
 let previousHash = "";
 let counter = 0;
 
@@ -231,9 +231,6 @@ function getLiveData() {
         });
       }
       chart.render();
-      // let entryTime = entries[entries.length - 1].lastEntry;
-      // console.log('entryTime:', entryTime);
-      // entryTime = entryTime.slice(11, 19);
 
       $("#temprature-id").html(entries[entries.length - 1].temp + " C°");
       $("#humidity-id").html(entries[entries.length - 1].hum + " %");
