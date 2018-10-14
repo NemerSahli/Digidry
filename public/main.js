@@ -30,6 +30,7 @@ $("#login-btn-id").click(() => {
 
       success: function(res) {
         console.log("response", res);
+        $("#label-user-id").html("User: " + user.username);
 
         if (res.error == 0) {
           hideForms();
