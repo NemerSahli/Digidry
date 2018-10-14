@@ -37,7 +37,7 @@ $("#login-btn-id").click(() => {
           getLiveData();
           updateData();
 
-          $("#liveData-form-id").show();
+          $("#body-form-id").show();
           $("#chart-body").show();
           $("#logout-id").show();
           $("#input-user-id").val("");
@@ -154,7 +154,7 @@ function hideForms() {
   $("#confirm-reset-pass-btn-id").hide();
   $("#chart-body").hide();
   $("#logout-id").hide();
-  $("#liveData-form-id").hide();
+  $("#body-form-id").hide();
   $("#login-logo").hide();
 }
 
