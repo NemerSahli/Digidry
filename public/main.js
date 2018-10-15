@@ -248,9 +248,9 @@ function getLiveData() {
 
       console.log(entries.length, lastEntriesLength, counter);
 
-      $("#temprature-id").html(entries[entries.length - 1].temp + " C°");
-      $("#humidity-id").html(entries[entries.length - 1].hum + " %");
-      $("#speed-id").html(entries[entries.length - 1].duty + " rpm");
+      $("#temprature-id").html(entries[entries.length - 1].temp);
+      $("#humidity-id").html(entries[entries.length - 1].hum);
+      $("#speed-id").html(entries[entries.length - 1].duty);
     },
     error: function(xhr, status, error) {
       console.log(`
