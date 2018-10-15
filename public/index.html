@@ -52,7 +52,7 @@
     <!-- ********************************************************* -->
     <!-- signup Form -->
     <div class="row justify-content-center mt-5" id="register-form-id">
-        <div class="col-4 form-group register-form border border-secondary rounded p-3">
+        <div class="col-8 col-sm-7 col-md-6 form-group register-form border border-secondary rounded p-3">
             <div class="form-group">
                 <label class="text-white">Email:</label>
                 <input type="email" class="form-control" id="input-register-user-id" aria-describedby="emailHelp" placeholder="Enter your email">
@@ -74,7 +74,7 @@
 
     <!-- Reset Password Form -->
     <div class="row justify-content-center mt-5" id="forgetPassword-form-id">
-        <div class="col-4 form-group login-form border border-secondary rounded p-3">
+        <div class="col-8 col-sm-7 col-md-6 form-group login-form border border-secondary rounded p-3">
             <div class="form-group">
                 <label for="email" class="text-white">Email</label>
                 <input type="email" class="form-control" id="forget-password-form-input-email-id" aria-describedby="emailHelp" placeholder="Enter your Email">
@@ -87,13 +87,13 @@
 
     <!-- ************************************ -->
     <!-- Body Form -->
-    <div id="body-form-id" class="row justify-content-center p-3">
+    <div id="body-form-id" class="row  p-3">
         <div class=" col-10">
             <img id="logged-in-logo" class="col-5 col-sm-4 col-md-3 col-lg-2" src="images/Union.svg"></img>
         </div>
 
-        <div class="row col-12 mt-4">
-            <div class="col-12 mb-2">
+        <div class="row justify-content-center col-12 mt-4">
+            <div class="col-12 mb-2 ml-5">
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
@@ -102,9 +102,9 @@
                     <li class="nav-item">
                         <a class="nav-link" id="add-device-tab" data-toggle="tab" href="#add-device" role="tab" aria-controls="add-device" aria-selected="false">Add new Device</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-                    </li>
+                    </li> -->
 
                 </ul>
             </div>
@@ -126,7 +126,7 @@
                                     <td>Name:</td>
                                     <td id="device-name-id">Apple-Dryer-2018</td>
                                     <td>
-                                        380514
+                                        <img src="images/380514.png" id="device-qr-code" class="" alt="" width="30px" height="auto">
                                     </td>
                                 </tr>
                                 <tr>
@@ -154,12 +154,12 @@
 
                             </tbody>
                         </table>
-                        <div class="ml-auto col-8 col-sm-6 col-md-5 col-lg-4 col-xl-3">
+                        <!-- <div class="ml-auto col-8 col-sm-6 col-md-5 col-lg-4 col-xl-3">
 
                             <img src="images/380514.png" id="device-qr-code" class="" alt="" width="50%" height="auto">
                             <div class="text-white mb-3 mr-auto ml-auto" style="opacity: 0,6;"> Device Qr-Code</div>
 
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- chart area -->
@@ -176,9 +176,9 @@
                 </div>
                 <!-- ********************************************************* -->
 
-                <div class="tab-pane fade text-white" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <!-- <div class="tab-pane fade text-white" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 
-                </div>
+                </div> -->
             </div>
         </div>
 

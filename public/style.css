@@ -44,7 +44,3 @@ table {
 #device-qr-code {
   border: 2px solid rgba(197, 194, 194, 0.596);
 }
-#logged-in-logo {
-  position: relative;
-  left: -2%;
-}
