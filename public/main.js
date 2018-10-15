@@ -200,10 +200,6 @@ var options = {
 
 var chart = new CanvasJS.Chart("chartContainer", options);
 
-let previousHash = "";
-let counter = 0;
-let lastEntriesLength = 0;
-
 function getLiveData() {
   $.ajax({
     // url:'http://nodeapps.vulkanclub.tech/getdata',
@@ -233,21 +229,41 @@ function getLiveData() {
       }
       chart.render();
 
-      if (entries.length > lastEntriesLength && counter == 0) {
-        console.log(entries.length, lastEntriesLength, counter);
-        console.log("loading device");
-        lastEntriesLength = entries.length;
-        counter++;
-      }
-      if (entries.length > lastEntriesLength && counter > 0) {
-        console.log(entries.length, lastEntriesLength, counter);
-        console.log("device connected");
-        lastEntriesLength = entries.length;
-        counter++;
-      }
+      let date = new Date();
 
-      console.log(entries.length, lastEntriesLength, counter);
+      let hh = date.getHours();
+      let mm = date.getMinutes();
+      let ss = date.getSeconds();
 
+      // let lastEntryTime = entries[entries.length - 1].lastEntry;
+
+      let lastTime = entries[entries.length - 1].lastEntry
+        .slice(11, 19)
+        .split(":");
+
+      let timeAsSeconds =
+        (Number(lastTime[0]) + 2) * 60 * 60 +
+        Number(lastTime[1]) * 60 +
+        Number(lastTime[2]);
+
+      let liveTimeAsSeconds = hh * 60 * 60 + mm * 60 + ss;
+
+      console.log(
+        "lastTimeEntry:",
+        lastTime,
+        "live Time:",
+        hh + ":" + mm + ":" + ss
+      );
+      console.log(liveTimeAsSeconds - timeAsSeconds);
+
+      if (liveTimeAsSeconds - timeAsSeconds < 20) {
+        $("#status-id").html("<span>Online</span>");
+
+        $("#status-color").css("background-color", "rgba(72, 255, 0, 0.7)");
+      } else {
+        $("#status-color").css("background-color", "rgba(255, 0, 0, 0.7)");
+        $("#status-id").html("<span>Offline</span>");
+      }
       $("#temprature-id").html(entries[entries.length - 1].temp);
       $("#humidity-id").html(entries[entries.length - 1].hum);
       $("#speed-id").html(entries[entries.length - 1].duty);

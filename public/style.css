@@ -40,6 +40,8 @@ table {
   border-radius: 50%;
   width: 15px;
   height: 15px;
+  position: relative;
+  top: 5px;
 }
 #device-qr-code {
   border: 2px solid rgba(197, 194, 194, 0.596);
