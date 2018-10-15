@@ -202,6 +202,7 @@ var chart = new CanvasJS.Chart("chartContainer", options);
 
 let previousHash = "";
 let counter = 0;
+let lastEntriesLength = 0;
 
 function getLiveData() {
   $.ajax({
@@ -231,6 +232,21 @@ function getLiveData() {
         });
       }
       chart.render();
+
+      if (entries.length > lastEntriesLength && counter == 0) {
+        console.log(entries.length, lastEntriesLength, counter);
+        console.log("loading device");
+        lastEntriesLength = entries.length;
+        counter++;
+      }
+      if (entries.length > lastEntriesLength && counter > 0) {
+        console.log(entries.length, lastEntriesLength, counter);
+        console.log("device connected");
+        lastEntriesLength = entries.length;
+        counter++;
+      }
+
+      console.log(entries.length, lastEntriesLength, counter);
 
       $("#temprature-id").html(entries[entries.length - 1].temp + " C°");
       $("#humidity-id").html(entries[entries.length - 1].hum + " %");
