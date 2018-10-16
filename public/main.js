@@ -256,7 +256,10 @@ function getLiveData() {
       );
       console.log(liveTimeAsSeconds - timeAsSeconds);
 
-      if (liveTimeAsSeconds - timeAsSeconds < 20) {
+      if (
+        liveTimeAsSeconds - timeAsSeconds <= 20 &&
+        liveTimeAsSeconds - timeAsSeconds >= 0
+      ) {
         $("#status-color").css("background-color", "rgba(72, 255, 0, 0.7)");
         $("#status-id").html("<span>Online</span>");
       } else {
