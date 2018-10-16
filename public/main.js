@@ -1,51 +1,47 @@
 $(document).ready(function() {
-  console.log("document is ready...");
+  console.log('document is ready...');
   hideForms();
-  $("#login-logo").show();
-  $("#login-form-id").show();
+  $('#login-logo').show();
+  $('#login-form-id').show();
 });
 
-// setInterval(function(){
+$('#login-btn-id').click(() => {
+  let userName = $('#input-user-id').val();
+  let password = $('#input-password-id').val();
 
-// },10000);
-
-$("#login-btn-id").click(() => {
-  let userName = $("#input-user-id").val();
-  let password = $("#input-password-id").val();
-
-  if (userName == "" || password == "") {
-    alert("user and password required!");
+  if (userName == '' || password == '') {
+    alert('user and password required!');
   } else {
     let user = {
-      username: $("#input-user-id").val(),
-      password: $("#input-password-id").val()
+      username: $('#input-user-id').val(),
+      password: $('#input-password-id').val()
     };
     console.log(user);
     $.ajax({
-      url: "login",
-      type: "POST",
+      url: 'login',
+      type: 'POST',
       data: JSON.stringify(user),
-      dataType: "json",
-      contentType: "application/json",
+      dataType: 'json',
+      contentType: 'application/json',
 
       success: function(res) {
-        console.log("response", res);
-        $("#label-user-id").html("User: " + user.username.split("@")[0]);
+        console.log('response', res);
+        $('#label-user-id').html('User: ' + user.username.split('@')[0]);
 
         if (res.error == 0) {
           hideForms();
           getLiveData();
           updateData();
 
-          $("#body-form-id").show();
-          $("#chart-body").show();
-          $("#logout-id").show();
-          $("#input-user-id").val("");
-          $("#input-password-id").val("");
+          $('#body-form-id').show();
+          $('#chart-body').show();
+          $('#logout-id').show();
+          $('#input-user-id').val('');
+          $('#input-password-id').val('');
         } else if (res.error == 2) {
           alert(res.result);
         } else {
-          alert("Invalid User or wrong password", res.result);
+          alert('Invalid User or wrong password', res.result);
         }
       },
       error: function(xhr, status, error) {
@@ -57,13 +53,13 @@ $("#login-btn-id").click(() => {
   }
 });
 
-$("#register-btn-id").click(() => {
-  let userName = $("#input-register-user-id").val();
-  let password = $("#input-register-password-id").val();
-  let confirmPassword = $("#input-register-confirm-password-id").val();
+$('#register-btn-id').click(() => {
+  let userName = $('#input-register-user-id').val();
+  let password = $('#input-register-password-id').val();
+  let confirmPassword = $('#input-register-confirm-password-id').val();
 
-  if (userName == "" || password == "" || confirmPassword == "") {
-    alert("user and password required!");
+  if (userName == '' || password == '' || confirmPassword == '') {
+    alert('user and password required!');
   } else if (password == confirmPassword) {
     let newUser = {
       username: userName,
@@ -71,24 +67,24 @@ $("#register-btn-id").click(() => {
     };
 
     $.ajax({
-      url: "register",
-      type: "POST",
+      url: 'register',
+      type: 'POST',
       data: JSON.stringify(newUser),
-      dataType: "json",
-      contentType: "application/json",
+      dataType: 'json',
+      contentType: 'application/json',
 
       success: function(res) {
-        console.log("response", res);
+        console.log('response', res);
         if (res.error == 101) {
-          alert("This email exist, please signup with other one");
+          alert('This email exist, please signup with other one');
         } else if (res.error == 0) {
           hideForms();
-          $("#login-form-id").show();
+          $('#login-form-id').show();
 
-          alert("Thank You for registration!");
+          alert('Thank You for registration!');
           // $('#inputTime').val();
         } else {
-          alert("Invalid User or wrong password", res.result);
+          alert('Invalid User or wrong password', res.result);
         }
       },
       error: function(xhr, status, error) {
@@ -102,40 +98,40 @@ $("#register-btn-id").click(() => {
   }
 });
 
-$("#forgetPassword-id").click(() => {
-  console.log("forget password clicked...");
-  $("#login-form-id").hide();
-  $("#forgetPassword-form-id").show();
+$('#forgetPassword-id').click(() => {
+  console.log('forget password clicked...');
+  $('#login-form-id').hide();
+  $('#forgetPassword-form-id').show();
 });
 
-$("#register-form-login-btn-id").click(() => {
-  $("#login-form-id").show();
-  $("#register-form-id").hide();
+$('#register-form-login-btn-id').click(() => {
+  $('#login-form-id').show();
+  $('#register-form-id').hide();
 });
 
-$("#forget-password-form-login-id").click(() => {
-  $("#login-form-id").show();
-  $("#forgetPassword-form-id").hide();
+$('#forget-password-form-login-id').click(() => {
+  $('#login-form-id').show();
+  $('#forgetPassword-form-id').hide();
 });
 
-$("#login-form-register-btn-id").click(() => {
-  $("#login-form-id").hide();
-  $("#register-form-id").show();
-  $("#register-btn-id").show();
+$('#login-form-register-btn-id').click(() => {
+  $('#login-form-id').hide();
+  $('#register-form-id').show();
+  $('#register-btn-id').show();
 });
 
-$("#logout-btn-id").click(() => {
-  console.log("Logout btn clicked...");
+$('#logout-btn-id').click(() => {
+  console.log('Logout btn clicked...');
 
   $.ajax({
-    url: "/logout",
-    type: "GET",
-    dataType: "json",
+    url: '/logout',
+    type: 'GET',
+    dataType: 'json',
     success: function(response) {
-      console.log("response", response);
+      console.log('response', response);
       hideForms();
-      $("#login-form-id").show();
-      $("#login-logo").show();
+      $('#login-form-id').show();
+      $('#login-logo').show();
     },
     error: function(xhr, status, error) {
       console.log(`
@@ -148,25 +144,25 @@ $("#logout-btn-id").click(() => {
 });
 
 function hideForms() {
-  $("#login-form-id").hide();
-  $("#register-form-id").hide();
-  $("#forgetPassword-form-id").hide();
-  $("#confirm-reset-pass-btn-id").hide();
-  $("#chart-body").hide();
-  $("#logout-id").hide();
-  $("#body-form-id").hide();
-  $("#login-logo").hide();
+  $('#login-form-id').hide();
+  $('#register-form-id').hide();
+  $('#forgetPassword-form-id').hide();
+  $('#confirm-reset-pass-btn-id').hide();
+  $('#chart-body').hide();
+  $('#logout-id').hide();
+  $('#body-form-id').hide();
+  $('#login-logo').hide();
 }
 
 var options = {
   animationEnabled: true,
-  theme: "dark1",
+  theme: 'dark1',
   title: {
-    text: ""
+    text: ''
   },
   axisY: {
     includeZero: false,
-    prefix: "",
+    prefix: '',
     lineThickness: 0
   },
   toolTip: {
@@ -177,20 +173,20 @@ var options = {
   },
   data: [
     {
-      type: "splineArea",
+      type: 'splineArea',
       showInLegend: true,
-      name: "Humidity %",
-      yValueFormatString: "##",
+      name: 'Humidity %',
+      yValueFormatString: '##',
 
       dataPoints: [
         // { x: 1, y: 35 },
       ]
     },
     {
-      type: "splineArea",
+      type: 'splineArea',
       showInLegend: true,
-      name: "Temprature C°",
-      yValueFormatString: "##.##",
+      name: 'Temprature C°',
+      yValueFormatString: '##.##',
       dataPoints: [
         // { x: 1, y: 40 },
       ]
@@ -198,14 +194,14 @@ var options = {
   ]
 };
 
-var chart = new CanvasJS.Chart("chartContainer", options);
+var chart = new CanvasJS.Chart('chartContainer', options);
 
 function getLiveData() {
   $.ajax({
     // url:'http://nodeapps.vulkanclub.tech/getdata',
-    url: "/getdata",
-    type: "GET",
-    dataType: "json",
+    url: '/getdata',
+    type: 'GET',
+    dataType: 'json',
     async: true,
     success: function(entries) {
       let startIndex = 0;
@@ -239,7 +235,7 @@ function getLiveData() {
 
       let lastTime = entries[entries.length - 1].lastEntry
         .slice(11, 19)
-        .split(":");
+        .split(':');
 
       let timeAsSeconds =
         (Number(lastTime[0]) + 2) * 60 * 60 +
@@ -249,10 +245,10 @@ function getLiveData() {
       let liveTimeAsSeconds = hh * 60 * 60 + mm * 60 + ss;
 
       console.log(
-        "lastTimeEntry:",
+        'lastTimeEntry:',
         lastTime,
-        "live Time:",
-        hh + ":" + mm + ":" + ss
+        'live Time:',
+        hh + ':' + mm + ':' + ss
       );
       console.log(liveTimeAsSeconds - timeAsSeconds);
 
@@ -260,15 +256,15 @@ function getLiveData() {
         liveTimeAsSeconds - timeAsSeconds <= 20 &&
         liveTimeAsSeconds - timeAsSeconds >= 0
       ) {
-        $("#status-color").css("background-color", "rgba(72, 255, 0, 0.7)");
-        $("#status-id").html("<span>Online</span>");
+        $('#status-color').css('background-color', 'rgba(72, 255, 0, 0.7)');
+        $('#status-id').html('<span>Online</span>');
       } else {
-        $("#status-color").css("background-color", "rgba(255, 0, 0, 0.7)");
-        $("#status-id").html("<span>Offline</span>");
+        $('#status-color').css('background-color', 'rgba(255, 0, 0, 0.7)');
+        $('#status-id').html('<span>Offline</span>');
       }
-      $("#temprature-id").html(entries[entries.length - 1].temp);
-      $("#humidity-id").html(entries[entries.length - 1].hum);
-      $("#speed-id").html(entries[entries.length - 1].duty);
+      $('#temprature-id').html(entries[entries.length - 1].temp);
+      $('#humidity-id').html(entries[entries.length - 1].hum);
+      $('#speed-id').html(entries[entries.length - 1].duty);
     },
     error: function(xhr, status, error) {
       console.log(`
