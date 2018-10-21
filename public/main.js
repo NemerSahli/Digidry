@@ -3,6 +3,15 @@ $(document).ready(function() {
   hideForms();
   $('#login-logo').show();
   $('#login-form-id').show();
+
+  var qrcode = new QRCode('qr-code-id');
+
+  $('#input-name-device')
+    .on('keyup', function() {
+      qrcode.makeCode($(this).val());
+    })
+    .keyup()
+    .focus();
 });
 
 $('#login-btn-id').click(() => {
