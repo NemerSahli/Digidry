@@ -1,5 +1,5 @@
 <div align="center">
-  <img height="100" background="black"
+  <img height="100"
     src="public/images/Union.svg">
   <h1>Fruits Dryer Machine Simulator</h1>
 </div>
