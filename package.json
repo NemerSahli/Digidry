@@ -23,7 +23,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "file-system": "^2.2.2",
-    "nodemailer": "^4.6.8",
+    "nodemailer": "^6.4.16",
     "randomstring": "^1.1.5"
   }
 }
