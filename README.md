@@ -12,4 +12,4 @@
 ![login](https://github.com/NemerSahli/Digidry/blob/master/public/images/login-digidry.png)
 ![main page](https://github.com/NemerSahli/Digidry/blob/master/public/images/screenshot-digidry.png)
 
-# TBD: Update this project
+# TBD: Update this project soon
